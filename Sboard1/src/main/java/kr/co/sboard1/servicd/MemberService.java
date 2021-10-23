@@ -1,13 +1,13 @@
-package kr.co.sboard.servicd;
+package kr.co.sboard1.servicd;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.sboard.Dao.MemberDao;
-import kr.co.sboard.vo.MemberVo;
-import kr.co.sboard.vo.TermsVo;
+import kr.co.sboard1.Dao.MemberDao;
+import kr.co.sboard1.vo.MemberVo;
+import kr.co.sboard1.vo.TermsVo;
 
 @Service
 public class MemberService {

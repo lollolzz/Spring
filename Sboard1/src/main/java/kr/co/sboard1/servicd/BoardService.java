@@ -1,4 +1,4 @@
-package kr.co.sboard.servicd;
+package kr.co.sboard1.servicd;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.sboard.Dao.BoardDao;
-import kr.co.sboard.vo.ArticleVo;
-import kr.co.sboard.vo.FileVo;
+import kr.co.sboard1.Dao.BoardDao;
+import kr.co.sboard1.vo.ArticleVo;
+import kr.co.sboard1.vo.FileVo;
 
 @Service
 public class BoardService {
@@ -28,25 +28,47 @@ public class BoardService {
 		dao.insertArticle(vo);
 		return vo.getSeq();
 	}
+	
 	public void insertFile(FileVo vo) {
 		dao.insertFile(vo);
 	}
-	public void selectArticle() {}
+	
+	public void insertComment(ArticleVo vo) {
+		dao.insertComment(vo);
+	}
+	
+	public ArticleVo selectArticle(int seq) {
+		return dao.selectArticle(seq);
+	}
+	
 	public List<ArticleVo> selectArticles(int start) {
 		return dao.selectArticles(start);
 	}
+	
+	public List<ArticleVo> selectComments(int seq){
+		return dao.selectComments(seq);
+	}
+	
 	public int selectCountTotal() {
 		return dao.selectCountTotal();
 	}
+	
 	public FileVo selectFile(int fseq) {
 		return dao.selectFile(fseq);
 	}
+	
 	public void updateFileDownload(int fseq) {
 		dao.updateFileDownload(fseq);
 	}
 	
-	public void updateArticle() {}
-	public void deleteArticle() {}
+	public int updateArticle(ArticleVo vo) {
+		dao.updateArticle(vo);
+		return vo.getSeq();
+	}
+	
+	public void deleteArticle(int seq) {
+		dao.deleteArticle(seq);
+	}
 	
 	
 	// 비지니스 처리 로직 구현 메서드 //

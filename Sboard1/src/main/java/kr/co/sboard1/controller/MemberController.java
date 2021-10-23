@@ -1,4 +1,4 @@
-package kr.co.sboard.controller;
+package kr.co.sboard1.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import kr.co.sboard.servicd.MemberService;
-import kr.co.sboard.vo.MemberVo;
-import kr.co.sboard.vo.TermsVo;
+import kr.co.sboard1.servicd.MemberService;
+import kr.co.sboard1.vo.MemberVo;
+import kr.co.sboard1.vo.TermsVo;
 
 @Controller
 public class MemberController {

@@ -1,11 +1,11 @@
-package kr.co.sboard.Dao;
+package kr.co.sboard1.Dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import kr.co.sboard.vo.MemberVo;
-import kr.co.sboard.vo.TermsVo;
+import kr.co.sboard1.vo.MemberVo;
+import kr.co.sboard1.vo.TermsVo;
 
 @Repository
 public interface MemberDao {

@@ -13,8 +13,81 @@
 		`rdate`=NOW();
 	
 	</insert>
-	<select id=""></select>
-	<select id=""></select>
-	<delete id=""></delete>
-	<update id=""></update>
+	<insert id="insertFile">
+		INSERT INTO `Jboard_file` SET
+			`parent`=#{parent},
+			`oriName`=#{oriName},
+			`newName`=#{newName},
+			`rdate`=NOW();
+	</insert>
+	
+	<insert id="insertComment">
+		INSERT INTO `Jboard_article` SET
+			`parent`=#{parnet},
+			`content`=#{content},
+			`uid`=#{uid},
+			`rdate`=NOW();
+	</insert>
+	<resultMap id="articleVoResultMap" type="kr.co.sboard.vo.ArticleVo">
+		<id 	column="seq"		property="seq"/>
+		<result column="parnet"		property="parent"/>
+		<result column="comment"	property="comment"/>
+		<result column="title"		property="title"/>
+		<result column="file"		property="file"/>
+		<result column="hit"		property="hit"/>
+		<result column="uid"		property="uid"/>
+		<result column="rdate"		property="rdate"/>
+		<association property="fileVo"  javaType="kr.co.sboard.vo.FileVo">
+			<id     column="fseq"		property="fseq"/>
+			<result column="fileparent" property="parnet" />
+			<result column="oriName" property="oriName" />
+			<result column="download" property="download" />
+		</association>
+	</resultMap>
+	<select id="selectArticle" resultMap="articleVoResultMap">
+		SELECT a.*, b.*, b.parent AS `fileParent` FROM `Jboard_article` AS a
+		left JOIN `Jboard_file` AS b
+		ON a.seq = b.parent
+		WHERE `seq`=#{seq};
+	</select>
+	
+	<select id="selectArticles" resultType="kr.co.sboard.vo.ArticleVo">
+		SELECT a.*, b.nick FROM `Jboard_article` AS a
+		JOIN `Jboard_member` AS b ON a.uid=b.uid
+		WHERE `parent`=0 AND `cate`=`free`
+		ORDER BY `seq` DESC
+		LIMIT #{start}, 10;
+	</select>
+	
+	<select id="selctCountTotal" resultType="int">
+		SELECT COUNT(`seq`) FROM `Jboard_article` WHERE `parent`=0 AND `cate`='free';
+	</select>
+	
+	<select id="selectFile" resultType="kr.co.sboard.vo.FileVo">
+		SELECT * FROM `Jboard_file` WHERE `fseq`=#{fseq};
+	</select>
+	
+	<select id="selectFile" resultType="kr.co.sboard.vo.FileVo">
+		SELECT a.*, b.nick FROM `Jboard_article` AS a
+		JOIN `Jboard_member` AS b ON a.uid=b.uid
+		WHERE `parent`=#{seq};
+	
+	</select>
+	
+	<select id="selectComments" resultType="kr.co.sboard.vo.ArticleVo">
+		SELECT a.*, b.nick FROM `Jboard_article`  AS a
+		JOIN `Jboard_member` AS b ON a.uid=b.uid
+		WHERE `parent`=#{seq};
+	</select>
+
+	<delete id="deleteArticle">
+		DELETE FROM `Jboard_article` WHERE `seq`=#{seq};
+	</delete>
+	<update id="updateArticle">
+		UPDATE `Jboard_article` SET
+			`title`=#{title},
+			`content`=#{content},
+			`rdate`=NOW()
+		WHERE `seq` = #{seq};
+	</update>
 </mapper>

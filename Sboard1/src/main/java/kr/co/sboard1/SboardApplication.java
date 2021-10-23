@@ -1,4 +1,4 @@
-package kr.co.sboard;
+package kr.co.sboard1;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

@@ -1,4 +1,4 @@
-package kr.co.sboard.controller;
+package kr.co.sboard1.controller;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import kr.co.sboard.servicd.BoardService;
-import kr.co.sboard.vo.ArticleVo;
-import kr.co.sboard.vo.FileVo;
-import kr.co.sboard.vo.MemberVo;
+import kr.co.sboard1.servicd.BoardService;
+import kr.co.sboard1.vo.ArticleVo;
+import kr.co.sboard1.vo.FileVo;
+import kr.co.sboard1.vo.MemberVo;
 
 @Controller
 public class BoardController {
@@ -97,6 +97,41 @@ public class BoardController {
 		FileVo fileVo = service.selectFile(fseq);
 		// 파일 다운로드 수행
 		service.fileDownload(resp, fileVo);
+	}
+	
+	@GetMapping("/modify")
+	public String modify (int seq, Model model) {
+		
+		ArticleVo vo = service.selectArticle(seq);
+		model.addAttribute(vo); 
+		
+		return "/modify";
+	}
+	
+	@PostMapping("/modify")
+	public String modify(ArticleVo vo) {
+		
+		service.updateArticle(vo);
+		if(vo.getFname().isEmpty()) {
+			// 파일 첨부안했을 때
+			vo.setFile(0);
+			service.insertArticle(vo);
+			System.out.println("파일 첨부 안함");
+		}else {
+			// 파일 첨부 했을 때
+			vo.setFile(1);
+			int seq = vo.getSeq();
+			seq = service.insertArticle(vo);
+			FileVo fvo = service.fileUpload(vo.getFname(), seq);
+			service.insertFile(fvo);
+		}
+		return "redirect:/view?seq="+vo.getSeq();
+	}
+	
+	@PostMapping("/comment")
+	public String comment(ArticleVo vo) {
+		service.insertComment(vo);
+		return "redirect:/view?seq="+vo.getParent();
 	}
 	
 	

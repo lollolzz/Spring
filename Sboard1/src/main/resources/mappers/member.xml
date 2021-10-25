@@ -19,9 +19,26 @@
 	
 	</insert>
 	
-	<select id=""></select>
+	<select id="selectTerms" resultType="kr.co.sboard.vo.TermsVo">
+		SELETE * FROM `Jboard_terms`;
+	</select>
 	
-	<select id=""></select>
+	<select id="selectMember" resultType="kr.co.sboard.vo.MemberVo">
+		SELETE * FROM `Jboard_member` WHERE `uid`=#{uid} AND `pass`=PASSWORD(#{pass});
+	</select>
+	
+	<select id="selectCountUid" resultType="int">
+		SELECT COUNT(`uid`) FROM `Jboard_member` WHERE `uid`=#{uid};
+	</select>
+	<select id="selectCountNick" resultType="int">
+		SELECT COUNT(`nick`) FROM `Jboard_member` WHERE `nick`=#{nick};
+	</select>
+	<select id="selectCountEmail" resultType="int">
+		SELECT COUNT(`email`) FROM `Jboard_member` WHERE `email`=#{email};
+	</select>
+	<select id="selectCountHp" resultType="int">
+		SELECT COUNT(`hp`) FROM `Jboard_member` WHERE `hp`=#{hp};
+	</select>
 	
 	<update id=""></update>
 	

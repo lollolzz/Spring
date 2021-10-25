@@ -20,7 +20,17 @@
 view에 데이터를 전닳할 때 사용한다.
 
 * resultMap을 사용하는 이유
+
 1. mybatis대신  resultMap을 사용하는 이유는 한번으로 AS를 쓸 필요가 없기 때문이다.
 2. 일반적으로 DTO클래스의 변수명(VO디렉터리)과 DB 테이블의 필드명이 서로 일치하지 않을경우 사용한다
 3. Association : 1:1관계의 테이블을 조인할 때 사용(조인객체)
 - property : 조인객체명 /// javaType : 조인객체의 자료형
+
+* 왜 selectcomments를 view controller에 넣어준것일까 ???
+  새로운 controller를 만들어서 해줘도 되지 않았을까 ???
+
+* view page에서 삭제 링크 태그를 
+"@{/delete(seq=${comment.seq},parent=${comment.parent})}" 이런 식으로 써준거지 ?
+seq=#{parnet} 이런식으로 사용하면 안되는 건가 ?
+
+* view 페이지에서 댓글 삭제시 list로 가게하지 말고 view페이지 그대로 있고 싶은데 위의 태그에서 무엇을 바꿔야 하는 걸까 ?

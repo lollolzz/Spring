@@ -1,6 +1,4 @@
-package kr.co.sboard1.Dao;
-
-import java.util.List;
+package kr.co.sboard1.dao;
 
 import org.springframework.stereotype.Repository;
 
@@ -9,24 +7,15 @@ import kr.co.sboard1.vo.TermsVo;
 
 @Repository
 public interface MemberDao {
-	
+
 	public void insertMember(MemberVo vo);
-	public TermsVo selectTerms();
-	
 	public MemberVo selectMember(String uid, String pass);
 	
-	public List<MemberVo> selectMembers();
+	public void selectMembers();
 	
-	public int selectCountUid(String uid);
+	public TermsVo selectTerms();
 	
-	public int selectCountNick(String nick);
+	public void updateMember();
+	public void deleteMember();
 	
-	public int selectCountEmail(String email);
-	
-	public int selectCountHp(String hp);
-	
-	public void updateMember(MemberVo vo);
-	
-	public void deleteMember(String uid);
-
 }

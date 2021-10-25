@@ -1,6 +1,7 @@
 package kr.co.sboard1.vo;
 
 public class MemberVo {
+
 	private String uid;
 	private String pass;
 	private String pass1;
@@ -100,5 +101,5 @@ public class MemberVo {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-
+	
 }

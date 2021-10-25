@@ -72,6 +72,10 @@ public class BoardService {
 		dao.deleteArticle(seq);
 	}
 	
+	public void deleteComment(int seq) {
+		dao.deleteComment(seq);
+	}
+	
 	public void updatesService(ArticleVo vo) {
 		dao.updateArticle(vo);
 	}

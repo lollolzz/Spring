@@ -14,6 +14,8 @@ public interface BoardDao {
 	
 	public void insertFile(FileVo vo);
 	
+	public void insertComment(ArticleVo vo);
+	
 	public ArticleVo selectArticle(int seq);
 	
 	public List<ArticleVo> selectArticles(int start);
@@ -24,14 +26,19 @@ public interface BoardDao {
 	
 	public List<ArticleVo> selectComments(int seq);
 	
-	
 	public int updateArticle(ArticleVo vo);	 //int seq 글번호로 삭제 및 업데이트
 	
 	public void updateFileDownload(int fseq);
 	
 	public void deleteArticle(int seq);
 	
-	public void insertComment(ArticleVo vo);
+	public void deleteComment(int seq);
+	
+	
+	
+	
+	
+	
 	
 	
 }

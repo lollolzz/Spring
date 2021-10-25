@@ -61,8 +61,10 @@ public class BoardController {
 	@GetMapping("/view")
 	public String view(int seq, Model model) {
 		
-	 	ArticleVo vo = service.selectArticle(seq);
-	 	model.addAttribute(vo);
+		ArticleVo vo = service.selectArticle(seq);
+		List<ArticleVo> comments = service.selectComments(seq);
+		model.addAttribute(vo);
+		model.addAttribute("comments", comments);
 		return "/view";
 	}
 	
@@ -152,4 +154,14 @@ public class BoardController {
 		service.insertComment(vo);
 		return "redirect:/view?seq="+vo.getParent();
 	}
+	
+	@GetMapping("/deleteComment")
+	public String deleteComment(int seq, int parent) {
+		service.deleteComment(seq);
+		return "redirect:/view?seq="+parent;
+	}
+	
+	
+	
+	
 }

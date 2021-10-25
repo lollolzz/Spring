@@ -1,5 +1,5 @@
 * 왜 delete에 getmpping방식을 사용하며
-  왜 getmapping에 redirect방식을 사용한거지 ?>
+  왜 getmapping에 redirect방식을 사용한거지 ?>,,, member에 logout도 getmapping방식을 사용햇네 ... 왜지 
 
 1. GetMapping
 - URL에 변수(데이터)를 포함시켜 요청

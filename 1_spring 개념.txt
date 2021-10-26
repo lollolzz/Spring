@@ -30,3 +30,30 @@ view에 데이터를 전닳할 때 사용한다.
   새로운 controller를 만들어서 해줘도 되지 않았을까 ???
 -> 요청을 view로 하는데 그 글과 그 글의 댓글도 같이 불러와야하므로 컨트롤러에서 같은 주소를 요청받고 데이터를 같이 불러오기 위해서 해줫다.
 
+
+
+*board.xml
+1.resultMap 수정 부분
+
+* id로 선언한 부분은 그 항목이 key값이기 때문이다
+* 필요없는 값들은 삭제하고 선언하여주엇다
+* <select id="selectArticle"  resultMap="articleVoResultMap">
+ -> 이 항목을 <resultMap id="articleVoResultMap" type="kr.co.sboard.vo.ArticleVo"> 와	
+    <association property="fileVo" javaType="kr.co.sboard.vo.FileVo">이걸로 선언하여준다
+    는 것은 articlevo안에 filevo가 선언되어져있어서 두가지를 연결 시켜주기 위한것이다
+
+* resultMap="articleVoResultMap"> 이부분을 resultType이 아니라 resultMap으로 선언하여 준것은 
+ 위에서 작성한 것들을 articlevo의 내용을 새롭게 map시켜주기 위한것
+	
+
+<select id="selectArticle"  resultMap="articleVoResultMap">
+SELECT a.*, b.*, b.parent AS `fileParent` FROM `Jboard_article` AS a
+LEFT JOIN `Jboard_file` AS b
+ON a.seq = b.parent
+WHERE `seq`=#{seq};
+</select>
+
+* 쿼리문을 위와 같이 바꿔준 이유는 view페이지에 oriName과 이 출력되어야하고
+  db에 글을 작성한 페이지에 파일이 올라간 seq나 parent를 연결시켜주기 위한 것이다
+
+

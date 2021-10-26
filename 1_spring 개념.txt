@@ -1,5 +1,6 @@
 * 왜 delete에 getmpping방식을 사용하며
   왜 getmapping에 redirect방식을 사용한거지 ?>,,, member에 logout도 getmapping방식을 사용햇네 ... 왜지 
+--> 삭제요청은 단순히 데이터를 처리만 하기 위한 것이므로 post방식으로 굳이 데이터를 전송하는 양식이 없기때문에 get방식을 사용하면된다.
 
 1. GetMapping
 - URL에 변수(데이터)를 포함시켜 요청
@@ -20,7 +21,6 @@
 view에 데이터를 전닳할 때 사용한다.
 
 * resultMap을 사용하는 이유
-
 1. mybatis대신  resultMap을 사용하는 이유는 한번으로 AS를 쓸 필요가 없기 때문이다.
 2. 일반적으로 DTO클래스의 변수명(VO디렉터리)과 DB 테이블의 필드명이 서로 일치하지 않을경우 사용한다
 3. Association : 1:1관계의 테이블을 조인할 때 사용(조인객체)
@@ -28,9 +28,5 @@ view에 데이터를 전닳할 때 사용한다.
 
 * 왜 selectcomments를 view controller에 넣어준것일까 ???
   새로운 controller를 만들어서 해줘도 되지 않았을까 ???
+-> 요청을 view로 하는데 그 글과 그 글의 댓글도 같이 불러와야하므로 컨트롤러에서 같은 주소를 요청받고 데이터를 같이 불러오기 위해서 해줫다.
 
-* view page에서 삭제 링크 태그를 
-"@{/delete(seq=${comment.seq},parent=${comment.parent})}" 이런 식으로 써준거지 ?
-seq=#{parnet} 이런식으로 사용하면 안되는 건가 ?
-
-* view 페이지에서 댓글 삭제시 list로 가게하지 말고 view페이지 그대로 있고 싶은데 위의 태그에서 무엇을 바꿔야 하는 걸까 ?

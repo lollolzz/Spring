@@ -1,0 +1,18 @@
+* 각 group의 cate마다 클릭시 list항목이 나오도록 하기 
+
+1. header -> controller로 group과 각 group을 처음 클릭했을 경우 화면에 나오는 cate를 th를 사용하여 설정해준다.
+2. controller에서 getmapping을 사용하여 우선적으로 /board/list 메서드를 받아주고
+   Model.addAttribute를 사용하여 group과 cate를 받아와준 뒤 /board/list로 group과 cate를 return 하여 준다
+3. Return 된 group, cate가 list.html페이지에 리턴되어 있는 상태이다
+4. list에서 <th:block th:include="@{/board/_aside__${group}__.html}"></th:block>사용하여 group과 cate를
+   list에 머물도록 하여준며 각 group별 aside롤 보내준다.<이 때 ${group}만 사용한 이유는 cate는 group안에 포함되기 때문
+5. 각 group의 aside에서 list에서 넘겨준 group과 cate를 받아 주어 화면에 출력하게 된다.
+
+* classappned를 사용한 이유는 무엇???
+-> 클래스의 속성을 추가하기를 원할때 사용한다 < 동적으로 클래스 추가하기>
+
+* 왜 intro페이지는 asdie를 하지않아도 다른 그룹들처럽 하버 및 디자인페이지가 잘 출력 되는거지 ?
+
+*th: block을 사용하는 이유 
+-> 보통 <form th:action="@{/member/login}" method="post"> 이런식으로 태그 안에 사용되어 지지만
+명시해줄 태그가 없을 경우 block을 사용하여 준다

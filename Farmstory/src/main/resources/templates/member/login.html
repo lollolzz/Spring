@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <title>로그인</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+    
+    </script>
 </head>
 <body>
     <div id="wrapper">
-    	<th:block th:include="/_header.html"></th:block>    	
+     <th:block th:include="/_header.html"></th:block>
         <section id="user" class="login">
             <form th:action="@{/member/login}" method="post">
                 <table border="0">
@@ -30,9 +34,8 @@
                 </p>
                 <a th:href="@{/member/terms}">회원가입</a>
             </div>
-
         </section>
-    	<th:block th:include="/_footer.html"></th:block>
+        <th:block th:include="/_footer.html"></th:block>
     </div>    
 </body>
 </html>

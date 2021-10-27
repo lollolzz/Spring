@@ -1,12 +1,12 @@
-$(function(){
+ $(function(){
 
-    $('.slider > ul').bxSlider({
-        slideWidth: 980,
-        pager: false,
-        controls: false,
-        auto: true
-    });
+            $('.slider > ul').bxSlider({
+                slideWidth: 980,
+                pager: false,
+                controls: false,
+                auto: true
+            });
 
-    $('#tabs').tabs();
+            $('#tabs').tabs();
 
-});
+        });

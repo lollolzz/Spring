@@ -10,10 +10,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>    
     <script th:src="@{/js/slider.js}"></script>
+
 </head>
 <body>
     <div id="wrapper">
-        <th:block th:include="/_header.html"></th:block>
+    	<th:block th:include="./_header.html"></th:block>
         <main>
             <div class="slider">
 
@@ -181,7 +182,7 @@
                 </div>
             </div>
         </main>
-        <th:block th:include="/_footer.html"></th:block>
+       <th:block th:include="./_footer.html"></th:block>
     </div>
     
 </body>

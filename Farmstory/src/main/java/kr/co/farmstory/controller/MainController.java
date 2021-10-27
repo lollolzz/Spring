@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-	@GetMapping(value = {"/", "/index"})
+	@GetMapping(value = {"/","/index"})
 	public String index() {
 		return "/index";
 	}
@@ -15,7 +15,6 @@ public class MainController {
 	public String hello() {
 		return "/introduction/hello";
 	}
-	
 	@GetMapping("/introduction/direction")
 	public String direction() {
 		return "/introduction/direction";

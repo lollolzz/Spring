@@ -11,9 +11,7 @@
     	<th:block th:include="@{/board/_aside__${group}__.html}"></th:block>
         <section id="board" class="write">
             <h3>글쓰기</h3>
-            <article>
-                <form th:action="@{/board/write(group=${group}, cate=${cate})}" method="post" enctype="multipart/form-data">
-                	<input type="hidden" name="uid" th:value="${session.sessMember.uid}"/>
+                <form th:action="@{/board/write(group=${group},cate=${cate})}" method="post" enctype="multipart/form-data">
              
                     <table>
                         <tr>

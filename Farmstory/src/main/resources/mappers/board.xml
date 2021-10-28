@@ -83,7 +83,7 @@
               `title`= #{title},
               `content`= #{content},
               `rdate`= NOW()
-        WHERE `seq` = #{seq};
+        WHERE `seq` = #{seq} AND `cate` = #{cate};
 	</update>
 	<update id="updateFileDownload">
 		UPDATE `Jboard_file` SET `download`=`download`+1 WHERE `fseq`=#{fseq};

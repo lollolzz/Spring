@@ -22,11 +22,11 @@ public interface BoardDao {
 	
 	public int selectCountTotal (String cate);
 	
-	public void updateArticle();
+	public void updateArticle(ArticleVo vo);
 	
 	public void updateFileDownload(int fseq);
 	
-	public void deleteArticle();
+	public void deleteArticle(int seq);
 
 	
 

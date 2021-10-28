@@ -50,13 +50,17 @@ public class BoardService {
 		return dao.selectCountTotal(cate);
 	}
 	
-	public void updateArticle() {}
+	public void updateArticle(ArticleVo vo) {
+		dao.updateArticle(vo);
+		}
 	
 	public void updateFileDownload(int fseq) {
 		dao.updateFileDownload(fseq);
 	}
 	
-	public void deleteArticle() {}
+	public void deleteArticle(int seq) {
+		dao.deleteArticle(seq);
+	}
 
 	// 비지니스 처리 로직 구현 메서드//
 	

@@ -11,9 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import kr.co.farmstory.service.BoardService;
 import kr.co.farmstory.vo.ArticleVo;
 import kr.co.farmstory.vo.FileVo;
-import kr.co.farmstory.service.BoardService;
 
 
 @Controller
@@ -108,11 +108,52 @@ public class BoardController {
 	}
 	
 	@GetMapping("/board/modify")
-	public String modify(Model model, String group, String cate) {
+	public String modify(Model model, String group, String cate, int seq) {
+		
+		ArticleVo vo = service.selectArticle(seq);
+		model.addAttribute(vo);
 		
 		model.addAttribute("group", group);
 		model.addAttribute("cate", cate);
 
 		return "/board/modify";
 	}
+	@PostMapping("/board/modify")
+	public String modify(ArticleVo vo, String group, String cate, Model model) {
+		
+		
+		int seq = vo.getSeq();
+		service.updateArticle(vo);
+		
+		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
+		
+		if(vo.getFname().isEmpty()) {
+			// 파일 첨부 안했을 때
+			vo.setFile(0);
+			service.insertArticle(vo);
+			System.out.println("파일 첨부안함");
+		}else {
+			// 파일 첨부 했을 때
+			vo.setFile(1);
+			seq = service.insertArticle(vo);
+			FileVo fvo = service.fileUpload(vo.getFname(), seq);
+			service.insertFile(fvo);
+		}
+		
+		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getSeq();
+	}
+	
+	@GetMapping("/board/delete")
+	public String delete(int seq,String group,String cate, Model model) {
+		
+		service.deleteArticle(seq);
+		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
+		
+		return "redirect:/board/list?group="+group+"&cate="+cate;
+	}
+	
+	
+
 }

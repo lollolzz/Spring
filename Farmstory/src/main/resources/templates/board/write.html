@@ -4,28 +4,21 @@
     <meta charset="UTF-8">
     <title>글쓰기</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script>
-      $(document).ready(function(){
-	      if ($(location).attr('href').slice(-3)=='102'){
-	      alert( '정상적으로 로그아웃 되었습니다.' );
-     	  }
-   });
-</script>
 </head>
 <body>
     <div id="wrapper">
-       <th:block th:include="/_header.html"></th:block>
-       <th:block th:include="@{/board/_aside__${group}__.html}"></th:block>
-       
+    	<th:block th:include="/_header.html"></th:block>
+    	<th:block th:include="@{/board/_aside__${group}__.html}"></th:block>
         <section id="board" class="write">
             <h3>글쓰기</h3>
             <article>
-                <form th:action="@{/write}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/board/write(group=${group}, cate=${cate})}" method="post" enctype="multipart/form-data">
+                	<input type="hidden" name="uid" th:value="${session.sessMember.uid}"/>
+             
                     <table>
                         <tr>
                             <td>제목</td>
-                            <td><input type="text" name="title" placeholder="제목을 입력하세요." /></td>
+                            <td><input type="text" name="title" placeholder="제목을 입력하세요."/></td>
                         </tr>
                         <tr>
                             <td>내용</td>
@@ -40,12 +33,16 @@
                     </table>
                     <div>
                         <a th:href="@{/board/list(group=${group},cate=${cate})}" class="btnCancel">취소</a>
-                        <input type="submit"  class="btnWrite" value="작성완료">
+                        <input type="submit" name = "btnWrite" class="btnWrite" value="작성완료"/>
                     </div>
                 </form>
             </article>
         </section>
-      <th:block th:include="/_footer.html"></th:block>
+        <!-- 내용 끝 -->
+                </article>
+            </section>
+        </div>
+    	<th:block th:include="/_footer.html"></th:block>
     </div>
 </body>
 </html>

@@ -14,9 +14,13 @@ public interface BoardDao {
 	
 	public void insertFile(FileVo vo);
 	
+	public void insertComment(ArticleVo vo);
+	
 	public ArticleVo selectArticle(int seq);
 	
 	public List<ArticleVo> selectArticles(String cate, int start);
+	
+	public List<ArticleVo> selectComments(int seq);
 	
 	public FileVo selectFile(int fseq);
 	
@@ -27,6 +31,8 @@ public interface BoardDao {
 	public void updateFileDownload(int fseq);
 	
 	public void deleteArticle(int seq);
+	
+	public void deleteComment(int seq);
 
 	
 

@@ -22,17 +22,16 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	
 	@GetMapping("/board/list")
 	public String list(Model model, String group, String cate, String pg) {
-
+		
 		int currentPage  = service.getPageCurrentPage(pg);
 		int start 	     = service.getLimitStart(currentPage);
 		int total 		 = service.selectCountTotal(cate);
 		int pageStartNum = service.getPageStartNum(total, start);
 		int lastPageNum  = service.getLastPageNum(total);
 		int groups[] 	 = service.getPageGroup(currentPage, lastPageNum);
-		
+
 		List<ArticleVo> articles = service.selectArticles(cate, start);
 		
 		model.addAttribute("group", group);
@@ -51,6 +50,7 @@ public class BoardController {
 		
 		model.addAttribute("group", group);
 		model.addAttribute("cate",cate);
+		
 		return "/board/write";
 	}
 	
@@ -65,11 +65,13 @@ public class BoardController {
 		int seq = 0;
 		
 		if(vo.getFname().isEmpty()) {
+			
 			// 파일을 첨부안했을때
 			vo.setFile(0);
 			seq = service.insertArticle(vo);
 			System.out.println("파일 첨부 안함");
 		}else {
+			
 			// 파일을 첨부했을 때
 			vo.setFile(1);
 			seq = service.insertArticle(vo);
@@ -99,8 +101,10 @@ public class BoardController {
 	public String view(Model model, String group, String cate, int seq) {
 
 		ArticleVo vo = service.selectArticle(seq);
-		model.addAttribute(vo);
+		List<ArticleVo> comments = service.selectComments(seq);
 		
+		model.addAttribute(vo);
+		model.addAttribute("comments", comments);
 		model.addAttribute("group", group);
 		model.addAttribute("cate", cate);
 
@@ -154,6 +158,28 @@ public class BoardController {
 		return "redirect:/board/list?group="+group+"&cate="+cate;
 	}
 	
+	@PostMapping("/board/insertComment")
+	public String insertComment(ArticleVo vo, String group, String cate, Model model) {
+		
+		service.insertComment(vo);
+		
+		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
+		
+		return "redirect:/board/view?seq="+vo.getParent()+"&group="+group+"&cate="+cate;
+		
+	}
 	
+	@GetMapping("/board/deleteComment")
+	public String deleteComment(Model model, String cate, String group, int seq, ArticleVo vo) {
+		
+		service.deleteComment(seq);
 
-}
+		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
+		
+		return "redirect:/board/view?seq="+vo.getParent()+"&group="+group+"&cate="+cate;
+	}
+
+}	
+	

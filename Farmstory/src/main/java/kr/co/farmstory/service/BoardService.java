@@ -34,6 +34,14 @@ public class BoardService {
 		dao.insertFile(vo);
 	}
 	
+	public void insertComment(ArticleVo vo) {
+		dao.insertComment(vo);
+	}
+	
+	public List<ArticleVo> selectComments(int seq) {
+		return dao.selectComments(seq);
+	}
+	
 	public ArticleVo selectArticle(int seq) {
 		return dao.selectArticle(seq);
 	}
@@ -60,6 +68,10 @@ public class BoardService {
 	
 	public void deleteArticle(int seq) {
 		dao.deleteArticle(seq);
+	}
+	
+	public void deleteComment(int seq) {
+		dao.deleteComment(seq);
 	}
 
 	// 비지니스 처리 로직 구현 메서드//

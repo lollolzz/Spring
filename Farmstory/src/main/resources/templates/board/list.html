@@ -9,7 +9,6 @@
     <div id="wrapper">
      <th:block th:include="@{/_header.html}"></th:block>
      <th:block th:include="@{/board/_aside__${group}__.html}"></th:block>
-     
         <section id="board" class="list">
             <h3>글목록</h3>
             <article>
@@ -24,7 +23,7 @@
                    
                    <tr th:each="article, i:${articles}">                        
                     	<td>[[${pageStartNum-i.index}]]</td>                        
-                        <td><a th:href="@{/board/view(group=${group}, cate=${cate}, seq=${article.seq})}">[[${article.title}]]</a>&nbsp;&#91;[[${article.comment}]]&#93;</td> 
+                        <td><a th:href="@{/board/view(group=${group},cate=${cate},seq=${article.seq})}">[[${article.title}]]</a>&nbsp;&#91;[[${article.comment}]]&#93;</td> 
                         <td>[[${article.uid}]]</td>
                         <td>[[${article.rdate.substring(2, 10)}]]</td>
                         <td>[[${article.hit}]]</td>
@@ -59,10 +58,7 @@
             </section>
 
         </div>
-        
-        
-        
-        
+   
         <th:block th:include="/_footer.html"></th:block>
     </div>    
 </body>

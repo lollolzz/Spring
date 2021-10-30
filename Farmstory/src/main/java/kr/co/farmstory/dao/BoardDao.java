@@ -22,6 +22,8 @@ public interface BoardDao {
 	
 	public List<ArticleVo> selectComments(int seq);
 	
+	public ArticleVo selectComment(int seq);
+	
 	public FileVo selectFile(int fseq);
 	
 	public int selectCountTotal (String cate);
@@ -29,6 +31,8 @@ public interface BoardDao {
 	public void updateArticle(ArticleVo vo);
 	
 	public void updateFileDownload(int fseq);
+	
+	public void updateComment(int seq);
 	
 	public void deleteArticle(int seq);
 	

@@ -23,6 +23,7 @@ public class BoardController {
 	private BoardService service;
 	
 	@GetMapping("/board/list")
+	
 	public String list(Model model, String group, String cate, String pg) {
 		
 		int currentPage  = service.getPageCurrentPage(pg);
@@ -146,6 +147,7 @@ public class BoardController {
 		}
 		
 		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getSeq();
+		
 	}
 	
 	@GetMapping("/board/delete")
@@ -166,7 +168,7 @@ public class BoardController {
 		model.addAttribute("group", group);
 		model.addAttribute("cate", cate);
 		
-		return "redirect:/board/view?seq="+vo.getParent()+"&group="+group+"&cate="+cate;
+		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
 		
 	}
 	
@@ -174,11 +176,34 @@ public class BoardController {
 	public String deleteComment(Model model, String cate, String group, int seq, ArticleVo vo) {
 		
 		service.deleteComment(seq);
-
+		
+		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
+	
+		
+		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
+	}
+	@GetMapping("/board/modifyComment")
+	public String updateComment(String group, String cate, Model model, int seq) {
+		
+		ArticleVo vo = service.selectComment(seq);
+		
 		model.addAttribute("group", group);
 		model.addAttribute("cate", cate);
 		
-		return "redirect:/board/view?seq="+vo.getParent()+"&group="+group+"&cate="+cate;
+		return "/board/view";
+		
+	}
+	@PostMapping("/board/modifyComment")
+	public String modifyComment(ArticleVo vo, String group, String cate, Model model, int seq) {
+		
+		service.updateComment(seq);
+		
+		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
+		
+		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
+		
 	}
 
 }	

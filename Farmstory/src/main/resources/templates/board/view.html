@@ -47,12 +47,12 @@
                     </span>
                     <textarea name="comment" readonly>[[${comment.content}]]</textarea>
                     <div>
-                        <a th:href="@{/board/deletComment(group=${group}, cate=${cate}, seq=${comment.seq}, parent=${comment.parent})}">삭제</a>
-                        <a th:href="@{/board/modifyComment}">수정</a>
+                        <a th:href="@{/board/deleteComment(group=${group},cate=${cate},seq=${comment.seq},parent=${comment.parent})}">삭제</a>
+                        <a th:href="@{/board/modifyComment(group=${group},cate=${cate},seq=${comment.seq},parent=${comment.parent})}">수정</a>
                     </div>
                 </article>
                 
-                <p class="empty">
+                <p th:if="${comments.size == 0}" class="empty">
                     등록된 댓글이 없습니다.
                 </p>
             </section>
@@ -60,12 +60,12 @@
             <!-- 댓글입력폼 -->
             <section class="commentForm">
                 <h3>댓글쓰기</h3>
-                <form th:action="@{/board/insertComment(group=${group},cate=${cate}, seq=${articleVo.seq})}" method="post">
+                <form th:action="@{/board/insertComment(group=${group},cate=${cate},seq=${articleVo.seq})}" method="post">
                 <input type="hidden" name="parent" th:value="${articleVo.seq}">
                 <input type="hidden" name="uid"    th:value="${session.sessMember.uid}">
                     <textarea name="content"></textarea>
                     <div>
-                        <a th:href="@{/board/view(group=${group}, cate=${cate}, seq=${articleVo.seq})}" class="btnCancel">취소</a>
+                        <a th:href="@{/board/view(group=${group},cate=${cate},seq=${articleVo.seq})}" class="btnCancel">취소</a>
                         <input type="submit" class="btnWrite" value="작성완료"/>
                     </div>
                 </form>

@@ -41,6 +41,9 @@ public class BoardService {
 	public List<ArticleVo> selectComments(int seq) {
 		return dao.selectComments(seq);
 	}
+	public ArticleVo selectComment(int seq) {
+		return dao.selectComment(seq);
+	}
 	
 	public ArticleVo selectArticle(int seq) {
 		return dao.selectArticle(seq);
@@ -64,6 +67,9 @@ public class BoardService {
 	
 	public void updateFileDownload(int fseq) {
 		dao.updateFileDownload(fseq);
+	}
+	public void updateComment(int seq) {
+		dao.updateComment(seq);
 	}
 	
 	public void deleteArticle(int seq) {

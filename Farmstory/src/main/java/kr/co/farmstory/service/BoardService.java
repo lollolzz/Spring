@@ -79,6 +79,10 @@ public class BoardService {
 	public void deleteComment(int seq) {
 		dao.deleteComment(seq);
 	}
+	
+	public int completeComment(int seq) {
+		return dao.completeComment(seq);
+	}
 
 	// 비지니스 처리 로직 구현 메서드//
 	

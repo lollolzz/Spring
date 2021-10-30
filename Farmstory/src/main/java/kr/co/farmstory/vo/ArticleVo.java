@@ -20,7 +20,7 @@ public class ArticleVo {
 	private String regip;
 	private String rdate;
 	
-
+	
 	
 	// 추가필드
 	private MultipartFile fname;
@@ -28,7 +28,16 @@ public class ArticleVo {
 	private String nick;
 	
 	private FileVo fileVo;
+	
+	public String getGroup() {
+		return group;
+	}
 
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+	private String group;
 	
 	public int getSeq() {
 		return seq;

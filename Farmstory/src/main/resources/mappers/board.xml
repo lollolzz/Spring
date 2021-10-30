@@ -95,8 +95,10 @@
 	
 	<update id="updateComment">
 		UPDATE `Jboard_article` SET 
+		
               `content`= #{content},
               `rdate`= NOW()
+              
         WHERE `seq` = #{seq};
 	</update>
 	
@@ -111,5 +113,14 @@
   	<delete id="deleteComment">
   		DELETE FROM `Jboard_article` WHERE `seq`=#{seq};
   	</delete>
+  	
+  	<update id="completeComment">
+  		UPDATE `Jboard_article SET
+  		
+  			`content`=#{content}
+  			
+  		WHERE
+  			`seq`=#{seq};
+  	</update>
   	
 </mapper>

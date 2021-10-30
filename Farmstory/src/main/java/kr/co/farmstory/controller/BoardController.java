@@ -103,7 +103,7 @@ public class BoardController {
 
 		ArticleVo vo = service.selectArticle(seq);
 		List<ArticleVo> comments = service.selectComments(seq);
-		
+
 		model.addAttribute(vo);
 		model.addAttribute("comments", comments);
 		model.addAttribute("group", group);
@@ -180,20 +180,10 @@ public class BoardController {
 		model.addAttribute("group", group);
 		model.addAttribute("cate", cate);
 	
-		
 		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
-	}
-	@GetMapping("/board/modifyComment")
-	public String updateComment(String group, String cate, Model model, int seq) {
-		
-		ArticleVo vo = service.selectComment(seq);
-		
-		model.addAttribute("group", group);
-		model.addAttribute("cate", cate);
-		
-		return "/board/view";
 		
 	}
+	
 	@PostMapping("/board/modifyComment")
 	public String modifyComment(ArticleVo vo, String group, String cate, Model model, int seq) {
 		
@@ -205,6 +195,29 @@ public class BoardController {
 		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
 		
 	}
+	
+
+	@PostMapping("/board/completeComment")
+	public String completeComment(HttpServletRequest req, String content, String group, String cate, ArticleVo vo, Model model) {
+		
+
+		int seq = vo.getSeq();
+		int parent = vo.getParent();
+		
+		service.completeComment(seq);
+		
+		model.addAttribute("group", group);
+		model.addAttribute("cate", cate);
+		model.addAttribute("parent", parent);
+		model.addAttribute("content", content);
+		
+		
+		return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
+
+		
+	}
+	
+	
 
 }	
 	

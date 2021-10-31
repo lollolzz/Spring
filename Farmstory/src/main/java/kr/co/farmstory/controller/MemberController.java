@@ -32,7 +32,7 @@ public class MemberController {
 	@PostMapping("/member/login")
 	public String login(HttpSession sess, String uid, String pass) {
 	  
-	  MemberVo vo = service.selectMember(uid, pass);
+	  MemberVo vo = service.selectMember(uid, pass); // if문에서 사용 할거이기 때문에 MemberVo에 담아준다
 
 	  if(vo == null) {
 		  // 회원이 아닐경우

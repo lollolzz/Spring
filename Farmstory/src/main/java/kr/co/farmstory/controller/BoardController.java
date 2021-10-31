@@ -65,7 +65,7 @@ public class BoardController {
 		
 		int seq = 0;
 		
-		if(vo.getFname().isEmpty()) {
+		if(vo.getFname().isEmpty()) { // sprigboot는 !=null이 먹히지 않는다 그래서 isEmpty()를 사용 
 			
 			// 파일을 첨부안했을때
 			vo.setFile(0);
@@ -103,7 +103,8 @@ public class BoardController {
 
 		ArticleVo vo = service.selectArticle(seq);
 		List<ArticleVo> comments = service.selectComments(seq);
-
+		service.updateComment(seq);
+			
 		model.addAttribute(vo);
 		model.addAttribute("comments", comments);
 		model.addAttribute("group", group);

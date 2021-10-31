@@ -80,8 +80,8 @@ public class BoardService {
 		dao.deleteComment(seq);
 	}
 	
-	public int completeComment(int seq) {
-		return dao.completeComment(seq);
+	public int completeComment(int seq, String content) {
+		return dao.completeComment(seq, content);
 	}
 
 	// 비지니스 처리 로직 구현 메서드//

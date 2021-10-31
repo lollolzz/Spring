@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>글보기</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-     <script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
           $(document).ready(function(){
              
              // 댓글 삭제
@@ -35,47 +35,39 @@
                     textarea.css({
                        'background': 'white',
                        'outline': '1px solid gray'
+                     
                     });
                     
                 }else{
-                   // 수정완료 모드
+
+                   // 수정모드 해제 
+                  tag.text('수정');
+                  tag.prev().css('display', 'inline');
+                  tag.next().css('display', 'none');                                                   
+                   textarea.attr('readonly', true);
+                   textarea.css({
+                      'background': 'transparent',
+                      'outline': 'none'
+                   });
                    
+                   // 수정완료 모드
                    var seq     = textarea.attr(".btnCommentModify");
                    var comment = textarea.val(); 
-                   var text = ($(event.target).parents("div").prev().val());
-                   var text2 = ($(event.target).parents("div").prev().prev().val());
+                   var content = ($(event.target).parents("div").prev().val());
+                   var seq = ($(event.target).parents("div").prev().prev().val());
                    
-                  	var jsonData = {
+                     var jsonData = {
                          'seq': seq,
-                         'comment': text
+                         'content': content
                       };
-                   alert(text2);
                    $.ajax({
                       url: '/board/completeComment',
                       type: 'post',
                       data: jsonData,   // 서버로 전송하는 데이터(JSON) 지정
                       dataType: 'json', // 서버로 부터 전달되는 데이터 종류
                       success: function(data){
-                    	  
-                         if(data.result == 1){
-                        	
-                            alert('댓글 수정이 성공 했습니다.');
-                            
-                            // 수정모드 해제
-                            tag.text('수정');
-                            tag.prev().css('display', 'inline');
-                            tag.next().css('display', 'none');                                                   
-                             textarea.attr('readonly', true);
-                             textarea.css({
-                                'background': 'transparent',
-                                'outline': 'none'
-                             });
-                             
-                         }else{
-                            alert('댓글 수정이 실패 했습니다.');
-                         }
-                         
-                      }
+                         alert(data.result)
+                      }   
                    });
                 }
                 return false;
@@ -114,7 +106,7 @@
                 <tr th:if="${articleVo.file == 1}">
                     <td>첨부파일</td>
                     <td>
-                       	<a th:href="@{/fileDownload(fseq=${articleVo.fileVo.fseq})}">[[${articleVo.fileVo.oriName}]]</a><br/>
+                          <a th:href="@{/fileDownload(fseq=${articleVo.fileVo.fseq})}">[[${articleVo.fileVo.oriName}]]</a><br/>
                         <span>[[${articleVo.fileVo.download}]]회 다운로드</span>
                     </td>
                 </tr>
@@ -139,11 +131,12 @@
                         <span>[[${comment.nick}]]</span>
                         <span>[[${comment.rdate.substring(2,10)}]]</span>
                     </span>
+                    <input type="hidden" th:value="${comment.seq}"/>
                     <textarea name="comment" readonly>[[${comment.content}]]</textarea>
                     <div>
                         <a th:href="@{/board/deleteComment(group=${group},cate=${cate},seq=${comment.seq},parent=${comment.parent})}" class="btnCommentDel">삭제</a>
                         <a th:href="@{/board/modifyComment(group=${group},cate=${cate},seq=${comment.seq})}" class="btnCommentModify">수정</a>
-                        <a th:href="@{/board/view(group=${group},cate=${cate},seq=${articleVo.seq})}" class="btnCommentCancel" style="display:none">취소</a>
+                        <a th:href="@{/board/view(group=${group},cate=${cate},seq=${comment.seq})}" class="btnCommentCancel" style="display:none">취소</a>
                     </div>
                 </article>
                 <p th:if="${comments.size == 0}" class="empty">
@@ -157,6 +150,7 @@
                 <form th:action="@{/board/insertComment(group=${group},cate=${cate},seq=${articleVo.seq})}" method="post">
                 <input type="hidden" name="parent" th:value="${articleVo.seq}">
                 <input type="hidden" name="uid"    th:value="${session.sessMember.uid}">
+     
                     <textarea name="content"></textarea>
                     <div>
                         <a th:href="@{/board/view(group=${group},cate=${cate},seq=${articleVo.seq})}" class="btnCancel">취소</a>

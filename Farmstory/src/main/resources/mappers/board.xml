@@ -114,13 +114,8 @@
   		DELETE FROM `Jboard_article` WHERE `seq`=#{seq};
   	</delete>
   	
-  	<update id="completeComment">
-  		UPDATE `Jboard_article SET
-  		
-  			`content`=#{content}
-  			
-  		WHERE
-  			`seq`=#{seq};
-  	</update>
+  	<update id="completeComment"> <!-- 오류가 날땐 항상 오타를 찾아 보자  -->
+        UPDATE `Jboard_article` SET `content` =#{content} WHERE `seq`=#{seq};
+     </update>
   	
 </mapper>

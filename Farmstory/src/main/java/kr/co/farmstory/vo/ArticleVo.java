@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ArticleVo {
+	
 	private int seq;
 	private int parent;
 	private int comment;

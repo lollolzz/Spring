@@ -43,30 +43,12 @@
                     <a href="#"><img src="./img/main_latest1_tit.png" alt="텃밭 가꾸기"/></a>
                     <img src="./img/main_latest1_img.jpg" alt="이미지"/>
                     <table border="0">
-                        <tr>
+                        <tr th:each="vo:${latest1}">
                             <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
+                            <td><a th:href="@{/board/view(group=Croptalk,cate=grow,seq=${vo.seq})}">[[${vo.title}]]</a></td> 
+                            <!-- group과 cate를 parameter로 받지않고 정확하게 받아오는 이유는 메인 페이지에서 최신글을 눌렀을때 그 해당 글로바로 가야하기 때문이며 정확하게 그 번호의 글을 불러 와야하기 때문이다,,
+                            그리고 MainController에서도 정확하게 cate이름을 명칭 해주었기 때문이다 -->
+                            <td>[[${vo.rdate.substring(2,10)}]]</td>
                         </tr>
                     </table>
                 </div>
@@ -74,61 +56,21 @@
                     <a href="#"><img src="./img/main_latest2_tit.png" alt="귀농학교"/></a>
                     <img src="./img/main_latest2_img.jpg" alt="이미지"/>
                     <table border="0">
-                        <tr>
+                    	<tr th:each="vo:${latest2}">
                             <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
+                            <td><a th:href="@{/board/view(group=Croptalk,cate=school,seq=${vo.seq})}">[[${vo.title}]]</a></td>
+                            <td>[[${vo.rdate.substring(2,10)}]]</td>
+                        </tr>                       
                     </table>
                 </div>
                 <div>
                     <a href="#"><img src="./img/main_latest3_tit.png" alt="농작물 이야기"/></a>
                     <img src="./img/main_latest3_img.jpg" alt="이미지"/>
                     <table border="0">
-                        <tr>
+                        <tr th:each="vo:${latest3}">
                             <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
-                        </tr>
-                        <tr>
-                            <td>></td>
-                            <td><a href="#">토마토! 건강하게 길러서 안심하고 먹자</a></td>
-                            <td>20-12-22</td>
+                            <td><a th:href="@{/board/view(group=Croptalk,cate=story,seq=${vo.seq})}">[[${vo.title}]]</a></td>
+                            <td>[[${vo.rdate.substring(2,10)}]]</td>
                         </tr>
                     </table>
                 </div>

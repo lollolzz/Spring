@@ -68,6 +68,7 @@ public class BoardService {
 	public void updateFileDownload(int fseq) {
 		dao.updateFileDownload(fseq);
 	}
+	
 	public void updateComment(int seq) {
 		dao.updateComment(seq);
 	}
@@ -80,8 +81,8 @@ public class BoardService {
 		dao.deleteComment(seq);
 	}
 	
-	public int completeComment(int seq, String content) {
-		return dao.completeComment(seq, content);
+	public int completeComment(ArticleVo vo) {
+		return dao.completeComment(vo);
 	}
 
 	// 비지니스 처리 로직 구현 메서드//

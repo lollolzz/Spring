@@ -38,7 +38,7 @@ public interface BoardDao {
 	
 	public void deleteComment(int seq);
 	
-	public int completeComment(int seq, String content);
+	public int completeComment(ArticleVo vo);
 
 	
 

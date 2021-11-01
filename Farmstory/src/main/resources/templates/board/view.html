@@ -51,22 +51,26 @@
                    });
                    
                    // 수정완료 모드
-                   var seq     = textarea.attr(".btnCommentModify");
-                   var comment = textarea.val(); 
-                   var content = ($(event.target).parents("div").prev().val());
-                   var seq = ($(event.target).parents("div").prev().prev().val());
+                   // data-seq -> data의 속성을 seq로 적어준것이다.
+                   var seq     = textarea.attr("data-seq"); 
+                   var content = textarea.val(); 
                    
                      var jsonData = {
                          'seq': seq,
                          'content': content
-                      };
+                         // content(이 content는 var의 변수명으로서 textarea.val()의 내용을 담아주는 역할 )를 'content'<ArticleVo에 설정되어 있는>로 저장하는 것이다 ,,,
+                         // 이제 이 content를 담은 'content'가 jsonData로 변형되어 출력되기 위하여 BoardController에서 completeComment로 설정해준 
+                         // controller로 간다
+					};
+                      
+                   // 다시 controller에서 return준 json값을 여기서 처리해준다 <view페이지에서 출력하는 것이아니고 > 밑의 ajax 부분을 통하여 출력하는 것이다
                    $.ajax({
                       url: '/board/completeComment',
                       type: 'post',
                       data: jsonData,   // 서버로 전송하는 데이터(JSON) 지정
                       dataType: 'json', // 서버로 부터 전달되는 데이터 종류
                       success: function(data){
-                         alert(data.result)
+                         alert('수정하시겠습니까?')
                       }   
                    });
                 }
@@ -130,12 +134,11 @@
                     <span>
                         <span>[[${comment.nick}]]</span>
                         <span>[[${comment.rdate.substring(2,10)}]]</span>
-                    </span>
-                    <input type="hidden" th:value="${comment.seq}"/>
-                    <textarea name="comment" readonly>[[${comment.content}]]</textarea>
+                    </span>                    
+                    <textarea name="comment" th:data-seq="${comment.seq}"  readonly>[[${comment.content}]]</textarea>
                     <div>
                         <a th:href="@{/board/deleteComment(group=${group},cate=${cate},seq=${comment.seq},parent=${comment.parent})}" class="btnCommentDel">삭제</a>
-                        <a th:href="@{/board/modifyComment(group=${group},cate=${cate},seq=${comment.seq})}" class="btnCommentModify">수정</a>
+                        <a th:href="@{#}" class="btnCommentModify">수정</a>
                         <a th:href="@{/board/view(group=${group},cate=${cate},seq=${comment.seq})}" class="btnCommentCancel" style="display:none">취소</a>
                     </div>
                 </article>

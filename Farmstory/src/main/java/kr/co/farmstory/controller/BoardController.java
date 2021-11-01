@@ -1,6 +1,8 @@
 package kr.co.farmstory.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import kr.co.farmstory.service.BoardService;
 import kr.co.farmstory.vo.ArticleVo;
@@ -103,7 +111,7 @@ public class BoardController {
 
       ArticleVo vo = service.selectArticle(seq);
       List<ArticleVo> comments = service.selectComments(seq);
-      service.updateComment(seq);
+      
          
       model.addAttribute(vo);
       model.addAttribute("comments", comments);
@@ -196,26 +204,27 @@ public class BoardController {
       return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
       
    }
-   
 
+   @ResponseBody
    @PostMapping("/board/completeComment")
-   public String completeComment(HttpServletRequest req, ArticleVo vo, Model model, String content, String group, String cate) {
-
-      int seq = vo.getSeq();
-      int parent = vo.getParent();
+   public String completeComment(HttpServletRequest req, ArticleVo vo) {
+            
+      int result = service.completeComment(vo);
       
-      service.completeComment(seq, content); 
-      
-      model.addAttribute("group", group);
-      model.addAttribute("cate", cate);
-      model.addAttribute("content", content);
+  	// Json 객체 생성 후 클라이언트 전송
+  	JsonObject json = new JsonObject();
+  	json.addProperty("result", result);
+  	
+  	return new Gson().toJson(json);
+  	
+  	// view페이지에서 json형식으로 담은 'content'를 controller로 보냈는데
+  	// 그 보낸 'content'는 service.completeComment(vo); 이곳의 vo 부분에 이미 설정되어져있는 건데
+  	// 거기에다가 자료를 저장 해준것이기 때문에 vo를 불러와서 int형식의 result라는 변수명에 저장을 한다
+  	// 저장된 result를 json으로 설정해준다.
+  	
+  	// return new Gson().toJson(json);<@ResponseBody을 이용해서 이부분을 통해 아까 왔던 view페이지로 다시 return 해준다,,, 그러면 view페이지에서 출력되는 것이 아니고 
+  	// HttpServletRequest이거를 통해서 (뷰페이지를 통하지 않고 출력된다) view페이지에 아까 그곳으로 전송한다 
 
-      return "redirect:/board/view?group="+group+"&cate="+cate+"&seq="+vo.getParent();
-
-      
-   }
-   
-   
-
-}   
+   }   
+}
    

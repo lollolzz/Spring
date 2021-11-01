@@ -22,4 +22,19 @@
 		SELECT * FROM `Jboard_terms`;
 	</select>
 	
+	<select id="selectCountUid" resultType="int">
+		SELECT COUNT(`uid`) FROM `Jboard_member` WHERE `uid`=#{uid}; 
+	</select>
+	
+	<select id="selectCountNick" resultType="int">
+		SELECT COUNT(`nick`) FROM `Jboard_member` WHERE `nick`=#{nick}; 
+	</select>
+	
+	<select id="selectCountEmail" resultType="int">
+		SELECT COUNT(`email`) FROM `Jboard_member` WHERE `email`=#{email}; 
+	</select>
+	
+	<select id="selectCountHp" resultType="int">
+		SELECT COUNT(`hp`) FROM `Jboard_member` WHERE `hp`=#{hp}; 
+	</select>
 </mapper>

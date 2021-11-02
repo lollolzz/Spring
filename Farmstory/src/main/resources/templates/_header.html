@@ -1,14 +1,3 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script>
-      $(document).ready(function(){
-	      if ($(location).attr('href').slice(-3)=='101'){
-	      alert( '정상적으로 로그아웃 되었습니다.' );
-     	  }
-		  if ($(location).attr('href').slice(-3)=='100'){
-		   alert( '일치하는 회원이 없습니다.\n아이디, 비밀번호를 다시 확인해 주세요.' );
-	      }
-   });
-</script>
 <header>
     <a th:href="@{/}" class="logo"><img th:src="@{/img/logo.png}" alt="로고"/></a>
     <p>

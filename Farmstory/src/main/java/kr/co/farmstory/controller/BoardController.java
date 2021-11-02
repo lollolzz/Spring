@@ -1,8 +1,7 @@
 package kr.co.farmstory.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.farmstory.service.BoardService;
@@ -207,15 +203,15 @@ public class BoardController {
 
    @ResponseBody
    @PostMapping("/board/completeComment")
-   public String completeComment(HttpServletRequest req, ArticleVo vo) {
+   public JsonObject completeComment(HttpServletRequest req, ArticleVo vo) {
             
-      int result = service.completeComment(vo);
+     int result = service.completeComment(vo);
       
   	// Json 객체 생성 후 클라이언트 전송
   	JsonObject json = new JsonObject();
   	json.addProperty("result", result);
   	
-  	return new Gson().toJson(json);
+  	return json;
   	
   	// view페이지에서 json형식으로 담은 'content'를 controller로 보냈는데
   	// 그 보낸 'content'는 service.completeComment(vo); 이곳의 vo 부분에 이미 설정되어져있는 건데

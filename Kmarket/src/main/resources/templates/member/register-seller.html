@@ -11,7 +11,8 @@
         <main>
             <div id="member-register-seller">
                 <h1>회원가입</h1>
-				<form action="#" method="POST">
+				<form th:action="@{/member/register-seller}" method="POST">
+					<input type="hidden" name="type" value="2"/>
 					<section>
 						<table>
 							<caption>필수 정보입력</caption>

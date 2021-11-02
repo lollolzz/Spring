@@ -1,8 +1,36 @@
 package kr.co.kmarket.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import kr.co.kmarket.dao.MemberDao;
+import kr.co.kmarket.vo.MemberTermsVo;
+import kr.co.kmarket.vo.MemberVo;
 
 @Service
 public class MemberService {
-
+	
+	@Autowired
+	private MemberDao dao;
+	
+	public void insertMember(MemberVo vo) {
+		dao.insertMember(vo);
+	}
+	
+	public MemberVo selectMember(String uid, String pass) {
+		return dao.selectMember(uid, pass);
+	}
+	
+	public int selectCountUid(String uid) {
+		return dao.selectCountUid(uid);
+	}
+	public int selectCountEmail(String email) {
+		return dao.selectCountEmail(email);
+	}
+	public int selectCountHp(String hp) {
+		return dao.selectCountHp(hp);
+	}
+	public MemberTermsVo selectSignup() {
+		 return dao.selectSignup();
+	}
 }

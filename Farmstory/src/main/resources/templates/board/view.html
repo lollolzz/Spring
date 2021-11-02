@@ -51,19 +51,24 @@
                    });
                    
                    // 수정완료 모드
-                   // data-seq -> data의 속성을 seq로 적어준것이다.
+                   
+                   // 수정 관련 주석 1
+                   // data-seq -> data의 속성을 seq로 적어준것이다(댓글 리스트 부분에 사용)
                    var seq     = textarea.attr("data-seq"); 
+                   // 댓글 입력폼의 textarea name=content 부분에 사용 
                    var content = textarea.val(); 
                    
                      var jsonData = {
                          'seq': seq,
                          'content': content
-                         // content(이 content는 var의 변수명으로서 textarea.val()의 내용을 담아주는 역할 )를 'content'<ArticleVo에 설정되어 있는>로 저장하는 것이다 ,,,
-                         // 이제 이 content를 담은 'content'가 jsonData로 변형되어 출력되기 위하여 BoardController에서 completeComment로 설정해준 
-                         // controller로 간다
+                    // 위에서 var 변수이름 으로 입력값을 대입받은 seq, content를 
+                    // ArticleVo에 선언되어져 있던 'seq', 'content'로 대입하여 주고 
+                    // 'seq', 'content'가 선언되어 있는 ArticleVo를 관련 Controller
+                    // 부분에서 값을 불러와 service객체에 대입하여 준다. (-> controller로 이동 )
+                         
 					};
-                      
-                   // 다시 controller에서 return준 json값을 여기서 처리해준다 <view페이지에서 출력하는 것이아니고 > 밑의 ajax 부분을 통하여 출력하는 것이다
+                  // 수정 관련 주석 3
+                  // controller에서 return받은 json데이터를 ajax통신을 이용하여 출력한다.
                    $.ajax({
                       url: '/board/completeComment',
                       type: 'post',

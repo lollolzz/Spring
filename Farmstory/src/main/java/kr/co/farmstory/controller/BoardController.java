@@ -2,7 +2,6 @@ package kr.co.farmstory.controller;
 
 import java.util.List;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.farmstory.service.BoardService;
@@ -203,7 +203,7 @@ public class BoardController {
 
    @ResponseBody
    @PostMapping("/board/completeComment")
-   public JsonObject completeComment(HttpServletRequest req, ArticleVo vo) {
+   public String completeComment(HttpServletRequest req, ArticleVo vo) {
             
      int result = service.completeComment(vo);
       
@@ -211,16 +211,18 @@ public class BoardController {
   	JsonObject json = new JsonObject();
   	json.addProperty("result", result);
   	
-  	return json;
+  	return new Gson().toJson(json);
   	
-  	// view페이지에서 json형식으로 담은 'content'를 controller로 보냈는데
-  	// 그 보낸 'content'는 service.completeComment(vo); 이곳의 vo 부분에 이미 설정되어져있는 건데
-  	// 거기에다가 자료를 저장 해준것이기 때문에 vo를 불러와서 int형식의 result라는 변수명에 저장을 한다
-  	// 저장된 result를 json으로 설정해준다.
+  	// 수정 관련 주석 2
+  	// view페이지에서 값을 대입한 ArticleVo를 ArticleVo vo와 같이 선언하여 주고 
+  	// service객체에서vo로 받아와 준 후 service.completeComment(vo)을 
+  	// int 형으로 선언된 result에 값을 대입하여 준다.
+  	// (값을 대입받은 result에는 현재 수정에 필요한 seq와 content의 값들이 들어와있는 상태이다)
+  	// result를 JsonObject를 사용하여 json을 선언하고 json에 result의 값을 추가하여 준다 
+  	// 그후 @ResponseBody어노테이션을 이용하여 Gson값을 Json으로 변환하여 다시 view페이지의 
+  	// ajax부분으로 return하여 준다  (이때 @ResponseBody의 영향으로 view페이지에서 출력되는 것이 아니라 ajax를 통하여 출력된)
   	
-  	// return new Gson().toJson(json);<@ResponseBody을 이용해서 이부분을 통해 아까 왔던 view페이지로 다시 return 해준다,,, 그러면 view페이지에서 출력되는 것이 아니고 
-  	// HttpServletRequest이거를 통해서 (뷰페이지를 통하지 않고 출력된다) view페이지에 아까 그곳으로 전송한다 
-
+  	// ** @ResponseBody에 대해서 조금 더 공부 필요 
    }   
 }
    

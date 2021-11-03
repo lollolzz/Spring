@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.kmarket.dao.MemberDao">
-	
 	<insert id="insertMember">
 		INSERT INTO `km_member` SET
 		`uid`=#{uid},
@@ -38,7 +37,7 @@
 	</select>
 
 	<select id="selectMember" resultType="kr.co.kmarket.vo.MemberVo">
-		SELECT * FROM `Jboard_member` WHERE `uid`=#{uid} AND `pass`=PASSWORD(#{pass});
+		SELECT * FROM `km_member` WHERE `uid`=#{uid} AND `pass`=PASSWORD(#{pass});
 	</select>
 
 	

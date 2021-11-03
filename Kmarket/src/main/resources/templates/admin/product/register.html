@@ -10,6 +10,60 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" th:href="@{/admin/css/admin.css}">
+    <script>
+    
+    	$(function() {
+	
+			var select1 = $('select[name=cate1]');
+			var select2 = $('select[name=cate2]');
+
+		// 1차 카테고리 생성
+		/*$.ajax({
+			url: '/admin/product/cate1',
+			type: 'get', //카테고리데이터만 요청하면 되기때문에 get사용 
+			dataType: 'json',
+			success: function(data){// json자료가 function(data)으로 들어온다} });*/
+		
+		$.get('/admin/product/getCate1', function(data){
+			
+			/* 카테고리 목록 불러오기 
+			for(var i=0 ; i<data.length ; i++){
+				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>")
+			}
+			
+			아래의 data는 list를 나타내고 각각의 데이터를 반복한다는 문구이다,, index번호는 i로 들어간다 
+			*/
+			$.each(data, function(i, vo){
+				select1.append("<option value='"+vo.cate1+"'>"+vo.title+"</option>")
+				
+			});	
+		});	
+		
+		// 1차 카테고리 선택 후 2차 카테고리 생성
+		// click은 화면에서 어떤것을 정확하게 선택하는 기능이고 
+		// change는 여러가지 카테고리중에 옵션을 골라 선택하는 기능을 구현 하는 것이다 
+		select1.change(function() {
+			
+			// 1차 선택 후 2차 카테고리를 선택하게 도와주는 문구
+
+			var cate1 = $(this).val();
+    		var jsonData = {'cate1': cate1};
+			
+			$.get('/admin/product/getCate2', jsonData, function(data){
+				
+				select2.empty();
+    				select2.append("<option value='0'>2차 분류 선택</option>");
+				
+				$.each(data, function(i, vo){
+        				select2.append("<option value='"+vo.cate2+"'>"+vo.title+"</option>");
+        			});
+			
+			});
+	
+		});
+	});	
+ 
+    </script>    
 </head>
 <body>
     <div id="admin-wrapper">
@@ -76,7 +130,8 @@
                 </nav>
                 <!-- 상품등록 컨텐츠 시작 -->
                 <article>
-                    <form action="#">
+                    <form th:action="@{/admin/product/register}" method="post" enctype="multipart/form-data">
+                    	<input type="hidden" name="seller" th:value="${session.sessMember.uid}"/>
 
                         <!-- 상품분류 -->
                         <section>
@@ -88,24 +143,16 @@
                                 <tr>
                                     <td>1차 분류</td>
                                     <td>
-                                        <select name="category1">
-                                            <option value="cate0">1차 분류 선택</option>
-                                            <option value="cate11">패션·의류·뷰티</option>
-                                            <option value="cate12">가전·디지털</option>
-                                            <option value="cate13">식품·생필품</option>
-                                            <option value="cate14">홈·문구·취미</option>                                                
+                                        <select name="cate1">
+                                            <option value="0">1차 분류 선택</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>2차 분류</td>
                                     <td>
-                                        <select name="category2">
-                                            <option value="cate0">2차 분류 선택</option>
-                                            <option value="cate21">남성의류</option>
-                                            <option value="cate22">여성의류</option>
-                                            <option value="cate23">잡화</option>
-                                            <option value="cate24">뷰티</option>                                                
+                                        <select name="cate2">
+                                            <option value="0">2차 분류 선택</option>                                               
                                         </select>
                                     </td>
                                 </tr>
@@ -126,61 +173,61 @@
                                 <tr>
                                     <td>기본설명</td>
                                     <td>
+                                        <input type="text" name="descript"/>
                                         <span>상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력</span>
-                                        <input type="text" name="#"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>제조사</td>
-                                    <td><input type="text" name="#"/></td>
+                                    <td><input type="text" name="company"/></td>
                                 </tr>
                                 <tr>
                                     <td>판매가격</td>
-                                    <td><input type="text" name="#"/>원</td>
+                                    <td><input type="text" name="price" value="0"/>원</td>
                                 </tr>                                    
                                 <tr>
                                     <td>할인율</td>
                                     <td>
+                                        <input type="text" name="discount" value="0"/>원
                                         <span>0을 입력하면 할인율 없음</span>
-                                        <input type="text" name="#"/>원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>포인트</td>
                                     <td>
                                         <span>0을 입력하면 포인트 없음</span>
-                                        <input type="text" name="#"/>점
+                                        <input type="text" name="point" value="0"/>점
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>재고수량</td>
-                                    <td><input type="text" name="#"/>개</td>
+                                    <td><input type="text" name="stcok" value="0"/>개</td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
                                     <td>
                                         <span>0을 입력하면 배송비 무료</span>
-                                        <input type="text" name="#"/>원
+                                        <input type="text" name="delivery" value="0"/>원
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상품 썸네일</td>
                                     <td>
                                         <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
-                                        <input type="file" name="#"/>
+                                        <input type="file" name="thumbFile1"/>
 
                                         <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
-                                        <input type="file" name="#"/>
+                                        <input type="file" name="thumbFile2"/>
 
                                         <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
-                                        <input type="file" name="#"/>
+                                        <input type="file" name="thumbFile3"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>상세 상품정보</td>
                                     <td>
                                         <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
-                                        <input type="file" name="#"/>
+                                        <input type="file" name="detailFile4"/>
                                     </td>
                                 </tr>
                             </table>                                
@@ -193,62 +240,27 @@
                                 [전자상거래에 관한 상품정보 제공에 관한 고시] 항목에 의거 등록해야 되는 정보입니다.
                             </p>
                             <table>
-                                <tr>
-                                    <td>상품번호</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
+                               
                                 <tr>
                                     <td>상품상태</td>
-                                    <td><input type="text" name=""/></td>
+                                    <td><input type="text" name="status" value="새상품"/></td>
                                 </tr>
                                 <tr>
                                     <td>부가세 면세여부</td>
-                                    <td><input type="text" name=""/></td>
+                                    <td><input type="text" name="dutyFree" value="과세상품"/></td>
                                 </tr>
                                 <tr>
                                     <td>영수증발행</td>
-                                    <td><input type="text" name=""/></td>
+                                    <td><input type="text" name="receipt" value="발행가능"/></td>
                                 </tr>
                                 <tr>
                                     <td>사업자구분</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>브랜드</td>
-                                    <td><input type="text" name=""/></td>
+                                    <td><input type="text" name="bizClass" value="사업자 판매자"/></td>
                                 </tr>
                                 <tr>
                                     <td>원산지</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>제품소재</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>색상</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>치수</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>제조자/수입국</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>제조국</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>취급시 주의사항</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>제조연월</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
+                                    <td><input type="text" name="origin" value="국내산"/></td>
+                                </tr>      
                                 <tr>
                                     <td>품질보증기준</td>
                                     <td><input type="text" name=""/></td>
@@ -263,7 +275,6 @@
                                 </tr>
                             </table>                                
                         </section>
-                        
                         <input type="submit" value="등록하기"/>
                     </form>
                 </article>

@@ -40,6 +40,7 @@ public class MemberController {
 		MemberVo vo =service.selectMember(uid, pass);
 		
 		if(vo == null) {
+			
 			// 회원이 아닐 경우 
 			return "redirect:/member/login?success=100";
 		}else {
@@ -51,10 +52,17 @@ public class MemberController {
 
 	}
 	
+	@GetMapping("/member/logout")
+	public String logout(HttpSession sess) {
+		sess.invalidate();
+		return "redirect:/index";
+	}
+	
 	@GetMapping("/member/register")
 	public String register() {
 		return "/member/register";
 	}
+	
 	@PostMapping("/member/register")
 	public String register(MemberVo vo, HttpServletRequest req) {
 		
@@ -63,12 +71,24 @@ public class MemberController {
 		
 		service.insertMember(vo);
 		
-		return "/member/login";
+		return "redirect:/member/login";
 	}
 
 	@GetMapping("/member/register-seller")
 	public String registerSeller() {
+		
 		return "/member/register-seller";
+	}
+	
+	@PostMapping("/member/register-seller")
+	
+	public String registerSeller(HttpServletRequest req, MemberVo vo) {
+		
+		String ip = req.getRemoteAddr();
+		vo.setIp(ip);
+		
+		service.insertMember(vo);
+		return "redirect:/member/login";
 	}
 	
 	@GetMapping("/member/signup")

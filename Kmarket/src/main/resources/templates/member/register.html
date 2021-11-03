@@ -19,6 +19,13 @@
         <main>
             <div id="member-register">
                 <h1>회원가입</h1>
+                <!-- register와 register-seller를 구분하여 가입하기 위하여
+                <input type="hidden" name="type" value="1">이 부분을 작성하여 주었다 
+               ** 처음 기능 구현시 구매자와 판매자 가입을 따로하려고 mapping부분을 각각 따로 설정해주어야 된다고 생각햇다 
+               근데 ,,,, 각 가입페이지마다 type을 설정해주고 DB와 vo부분의 데이터를 같게 하여 준다면 오류없이 정상정으로 데이터가 들어온다....
+               
+               만약 register로 가입하는데 이 페이지에는 vo에 선언되어져있는 company가 설정 되어져 있지 않다 
+               이 값은 회원가입을 완료 하면 null값으로 입력되어 가입이 완료 되게 된다.  -->
 				<form th:action="@{/member/register}" method="POST">
 					<input type="hidden" name="type" value="1">
 					<section>

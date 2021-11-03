@@ -72,8 +72,6 @@
 					<label><input type="checkbox" name="agree3" />동의합니다.</label>
 				</section>
 				
-				<!-- join페이지에서 일반회원, 판매자를 구분하기 위하여 type==1 or 2를 설정하여 주었
-				아래는 seller회원 가입시필요한 항목이기 때문에 th:if="${type==2}이렇게 설정 해줌   -->
 				<section th:if="${type==2}">
 					<h3><span class="essential">(필수)</span>전자세금 신고납부 이용약관</h3>
 					<textarea class="location" readonly>[[${memberTermsVo.tax}]]</textarea>

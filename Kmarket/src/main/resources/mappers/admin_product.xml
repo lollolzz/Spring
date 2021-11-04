@@ -38,6 +38,7 @@
 		`etc4`=#{etc4},
 		`etc5`=#{etc5};	
 	</insert>
+	
 	<select id="selectProduct"></select>
 	<select id="selectProducts"></select>
 	<update id="updateProduct"></update>

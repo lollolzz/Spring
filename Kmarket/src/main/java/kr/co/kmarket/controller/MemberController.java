@@ -103,7 +103,7 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@GetMapping("member/checkUid")
+	@GetMapping("/member/checkUid")
 	public String checkUid(String uid) {
 		
 		//System.out.println("uid : " +uid);
@@ -117,7 +117,7 @@ public class MemberController {
 		return new Gson().toJson(json);
 	}
 	@ResponseBody
-	@GetMapping("member/checkEmail")
+	@GetMapping("/member/checkEmail")
 	public String checkEmail(String email) {
 		
 		//System.out.println("uid : " +uid);
@@ -131,7 +131,7 @@ public class MemberController {
 		return new Gson().toJson(json);
 	}
 	@ResponseBody
-	@GetMapping("member/checkHp")
+	@GetMapping("/member/checkHp")
 	public String checkHp(String hp) {
 		
 		//System.out.println("uid : " +uid);

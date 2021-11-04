@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.kmarket.admin.dao.AdminProductDao;
+
 import kr.co.kmarket.vo.ProductCate1Vo;
 import kr.co.kmarket.vo.ProductCate2Vo;
 import kr.co.kmarket.vo.ProductVo;
@@ -45,7 +46,8 @@ public class AdminProductService {
 			
 			File file = new File("src/main/resources/static/thumb");
 		    String path = file.getAbsolutePath();
-
+		    
+   
 		    int i = 0;
 		    
 		    // 썸네일을 하나만 혹은 두개만 이런 식으로 출력할 수 있기 때문에 for문을 사용하여 준다
@@ -55,7 +57,7 @@ public class AdminProductService {
 		    		// 썸네일 이미지 파일을 첨부했을 경우
 		    		
 		    		 /* 여러 클라이언트가 같은 이름으로 파일을 업로드 할 수 있기 때문에
-				        중복되는것을 막기위하여 구분해주기 위한것*/
+				     * 중복되는것을 막기위하여 구분해주기 위한것*/
 				    String name = mf.getOriginalFilename();
 				    String ext = name.substring(name.lastIndexOf("."));
 

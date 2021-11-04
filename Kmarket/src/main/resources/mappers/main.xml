@@ -4,6 +4,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.kmarket.dao.MainDao">
 	
+	<resultMap id="categoriesMap" type="kr.co.kmarket.vo.CategoriesVo">
+		<result property="cate1" column="cate1"/>
+		<result property="tit1" column="tit1"/>
+		
+		<collection property="cate2List" ofType="kr.co.kmarket.vo.ProductCate2Vo">
+			<result property="cate1" column="cate1"/>
+			<result property="cate2" column="cate2"/>
+			<result property="title" column="tit2"/>
+		</collection>
+	</resultMap>
+	
+	<!-- resultMap -> 새로운 구조를 만들기 위해 사용한다 why?아래 쿼리에서 새로운 구조를 만들기 위해 join을 해주었기 때문
+	아래의 쿼리를 보면 cate1을 c1으로 cate2를 c2로 이름을 지정 해 준 후, 
+	c2의 cate1과 cate2 과 c1의 title을 tit1로 c2의 title를 tit2롤 설정하여 조인시켜주것 
+	  -->
+	<select id="selectCategories" resultMap="categoriesMap">
+		SELECT
+			c2.cate1,
+			c2.cate2,
+			c1.title AS tit1,
+			c2.title AS tit2
+		FROM `km_product_cate1` AS c1	
+		JOIN `km_product_cate2` AS c2
+		ON c1.cate1 = c2.cate1
+		ORDER BY c2.cate1, c2.cate2;
+	</select>
+	
 </mapper>
 
 

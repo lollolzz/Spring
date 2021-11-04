@@ -455,6 +455,18 @@ footer p > strong {
     vertical-align: middle;
     margin-right: 5px;
 }
+#member-register-seller .btnZip {
+    display: inline-block;
+    width: 100px;
+    height: 27px;
+    font-size: 15px;
+     margin-top: 6px;
+    border: 1px solid #dfe5ed;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 2px;
+    
+}
 
 #member-register-seller form input[type=submit] {
     display: block;

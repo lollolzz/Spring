@@ -31,7 +31,7 @@
 				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>")
 			}
 			
-			아래의 data는 list를 나타내고 각각의 데이터를 반복한다는 문구이다,, index번호는 i로 들어간다 
+			아래의 data는 List<CategoriesVo>를 나타내고 각각의 데이터를 반복한다는 문구이다,, index번호는 i로 들어간다 
 			*/
 			$.each(data, function(i, vo){
 				select1.append("<option value='"+vo.cate1+"'>"+vo.title+"</option>")
@@ -40,8 +40,6 @@
 		});	
 		
 		// 1차 카테고리 선택 후 2차 카테고리 생성
-		// click은 화면에서 어떤것을 정확하게 선택하는 기능이고 
-		// change는 여러가지 카테고리중에 옵션을 골라 선택하는 기능을 구현 하는 것이다 
 		select1.change(function() {
 			
 			// 1차 선택 후 2차 카테고리를 선택하게 도와주는 문구
@@ -52,11 +50,11 @@
 			$.get('/admin/product/getCate2', jsonData, function(data){
 				
 				select2.empty();
-    				select2.append("<option value='0'>2차 분류 선택</option>");
+    			select2.append("<option value='0'>2차 분류 선택</option>");
 				
 				$.each(data, function(i, vo){
-        				select2.append("<option value='"+vo.cate2+"'>"+vo.title+"</option>");
-        			});
+        			select2.append("<option value='"+vo.cate2+"'>"+vo.title+"</option>");
+        		});
 			
 			});
 	
@@ -167,8 +165,10 @@
                             </p>
                             <table>
                                 <tr>
+                                  <!-- 아래의 각 항목마다 이름을 지정해주어야 한다 why? DB에 설정되어져 있는 이름 값들과 값을 일치
+                                  시켜주어야 정상적으로 데이터베이스에 업로드가 되기 때문이다 -->
                                     <td>상품명</td>
-                                    <td><input type="text" name="#"/></td>
+                                    <td><input type="text" name="name"/></td>
                                 </tr>
                                 <tr>
                                     <td>기본설명</td>

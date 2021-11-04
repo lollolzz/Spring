@@ -114,6 +114,7 @@ $(document).ready(function(){
 		$('input[name=hp]').focusout(function(){
 			
 			var hp = $(this).val();
+			var jsonData = {'hp':hp};
 			
 			$.get('/member/checkHp', jsonData, function(data){
 				

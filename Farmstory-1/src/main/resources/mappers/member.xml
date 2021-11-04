@@ -22,6 +22,10 @@
 		SELECT * FROM `Jboard_terms`;
 	</select>
 	
+	<select id="selectMember" resultType="kr.co.farmstory1.vo.MemberVo">
+		SELECT * FROM `Jboard_member` WHERE `uid`=#{uid} AND `pass`=PASSWORD(#{pass});
+	</select>
+	
 	<select id="selectCountUid" resultType="int">
 		SELECT COUNT(`uid`) FROM `Jboard_member` WHERE `uid`=#{uid}; 
 	</select>

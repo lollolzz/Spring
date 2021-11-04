@@ -9,7 +9,7 @@ import kr.co.farmstory1.vo.TermsVo;
 public interface MemberDao {
 	
 	public void insertMember(MemberVo vo);
-	public void selectMember();
+	public MemberVo selectMember(String uid, String pass);
 	public void selectMembers();
 	
 	public TermsVo selectTerms();

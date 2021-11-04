@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
-    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
     <div id="wrapper">
     	<th:block th:include="/_header.html"></th:block>
         <section id="user" class="login">
-            <form th:action="@{/member/login}">
+            <form th:action="@{/member/login}" method="post">
                 <table border="0">
                     <tr>
                         <td><img th:src="@{/img/login_ico_id.png}" alt="아이디"/></td>

@@ -2,6 +2,7 @@ package kr.co.farmstory1.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,23 @@ public class MemberController {
 	public String login() {
 		return "/member/login";
 	}
+	
+	@PostMapping("/member/login")
+	public String login(HttpSession sess, String uid, String pass) {
+		
+		MemberVo vo = service.selectMember(uid, pass);
+		
+		if(vo == null) {
+			  // 회원이 아닐경우
+			  return "redirect:/member/login?success=100";
+		  }else {
+			  // 회원이 맞을경우
+			  sess.setAttribute("sessMember", vo);
+			  
+			  return "redirect:/index"; 
+		  }
+		}
+	
 	
 	@GetMapping("/member/terms")
 	public String terms(Model model) {

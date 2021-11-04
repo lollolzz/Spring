@@ -19,7 +19,9 @@ public class MemberService {
 	public void insertMember(MemberVo vo) {
 		dao.insertMember(vo);
 	}
-	public void selectMember() {}
+	public MemberVo selectMember(String uid, String pass) {
+		 return dao.selectMember(uid,pass);
+	}
 	public void selectMembers() {}
 	
 	public TermsVo selectTerms() {

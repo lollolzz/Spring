@@ -40,7 +40,11 @@ public class ProductVo {
 	private String etc4;
 	private String etc5;
 	
-	// 추가필드
+	// 추가필드 I
+	private int salePrice;
+	
+	
+	// 추가필드 II
 	
 	private MultipartFile thumbFile1;
 	private MultipartFile thumbFile2;
@@ -51,6 +55,20 @@ public class ProductVo {
 		List<MultipartFile> files = Arrays.asList(thumbFile1, thumbFile2, thumbFile3, detailFile4);
 		return files;
 	}
+	
+	
+
+	public int getSalePrice() {
+		return salePrice;
+	}
+
+
+
+	public void setSalePrice(int salePrice) {
+		this.salePrice = salePrice;
+	}
+
+
 
 	public int getProductCode() {
 		return productCode;

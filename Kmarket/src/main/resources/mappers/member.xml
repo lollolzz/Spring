@@ -6,7 +6,7 @@
 	<insert id="insertMember">
 		INSERT INTO `km_member` SET
 		`uid`=#{uid},
-		`pass`=PASSWORD(#{pass1}),
+		`pass`=PASSWORD(#{pass}),
 		`name`=#{name},
 		`gender`=#{gender},
 		`hp`=#{hp},
@@ -31,24 +31,19 @@
 		`etc4`=#{etc4},
 		`etc5`=#{etc5};	
 	</insert>
-	
-	<select id="selectSignup" resultType="kr.co.kmarket.vo.MemberTermsVo">
-		SELECT * FROM `km_member_terms`;
-	</select>
-
 	<select id="selectMember" resultType="kr.co.kmarket.vo.MemberVo">
 		SELECT * FROM `km_member` WHERE `uid`=#{uid} AND `pass`=PASSWORD(#{pass});
 	</select>
-
-	
-	<select id="selectCountUid" resultType="int">
-		SELECT COUNT(`uid`) FROM `Jboard_member` WHERE `uid`=#{uid}; 
+	<select id="selectMembers"></select>
+	<select id="selectTerms" resultType="kr.co.kmarket.vo.MemberTermsVo">
+		SELECT * FROM `km_member_terms`;
 	</select>
-	<select id="selectCountEmail" resultType="int">
-		SELECT COUNT(`email`) FROM `Jboard_member` WHERE `email`=#{email}; 
-	</select>
-	<select id="selectCountHp" resultType="int">
-		SELECT COUNT(`hp`) FROM `Jboard_member` WHERE `hp`=#{hp}; 
-	</select>
-	
+	<update id="updateMember"></update>
+	<delete id="deleteMember"></delete>
 </mapper>
+
+
+
+
+
+

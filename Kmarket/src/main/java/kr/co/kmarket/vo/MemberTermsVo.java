@@ -4,13 +4,11 @@ import lombok.Data;
 
 @Data
 public class MemberTermsVo {
-	
 	private String terms;
 	private String privacy;
 	private String location;
 	private String finance;
 	private String tax;
-	
 	public String getTerms() {
 		return terms;
 	}
@@ -41,8 +39,6 @@ public class MemberTermsVo {
 	public void setTax(String tax) {
 		this.tax = tax;
 	}
-	
-	
 	
 	
 	

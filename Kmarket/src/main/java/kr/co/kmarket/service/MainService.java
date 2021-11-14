@@ -11,17 +11,15 @@ import kr.co.kmarket.vo.ProductVo;
 
 @Service
 public class MainService {
-	
+
 	@Autowired
 	private MainDao dao;
 	
-	// CategoriesVo를 List화 한 객체를 selectCategoreis에 담고 이것을 dao로 리턴
-	public List<CategoriesVo> selectCategories() {
+	public List<CategoriesVo> selectCategories(){
 		return dao.selectCategories();
-		
 	}
+	
 	public List<ProductVo> selectMainProduct(String order) {
 		return dao.selectMainProduct(order);
 	}
-
 }

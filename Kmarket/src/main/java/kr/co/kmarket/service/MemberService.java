@@ -16,21 +16,13 @@ public class MemberService {
 	public void insertMember(MemberVo vo) {
 		dao.insertMember(vo);
 	}
-	
-	public MemberVo selectMember(String uid, String pass) {
-		return dao.selectMember(uid, pass);
+	public MemberVo selectMember(MemberVo vo) {
+		return dao.selectMember(vo);
 	}
-	
-	public int selectCountUid(String uid) {
-		return dao.selectCountUid(uid);
-	}
-	public int selectCountEmail(String email) {
-		return dao.selectCountEmail(email);
-	}
-	public int selectCountHp(String hp) {
-		return dao.selectCountHp(hp);
-	}
-	public MemberTermsVo selectSignup() {
-		 return dao.selectSignup();
-	}
+	public void selectMembers() {}
+	public MemberTermsVo selectTerms() {
+		return dao.selectTerms();
+	}	
+	public void updateMember() {}
+	public void deleteMember() {}
 }

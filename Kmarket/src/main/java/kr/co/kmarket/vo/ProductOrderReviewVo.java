@@ -4,15 +4,14 @@ import lombok.Data;
 
 @Data
 public class ProductOrderReviewVo {
-	
+
 	private int reviewId;
 	private int productCode;
 	private String content;
 	private String uid;
-	private String rating;
+	private int rating;
 	private String ip;
 	private String rdate;
-	
 	public int getReviewId() {
 		return reviewId;
 	}
@@ -37,10 +36,10 @@ public class ProductOrderReviewVo {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public String getRating() {
+	public int getRating() {
 		return rating;
 	}
-	public void setRating(String rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 	public String getIp() {
@@ -57,6 +56,4 @@ public class ProductOrderReviewVo {
 	}
 	
 	
-	
-
 }

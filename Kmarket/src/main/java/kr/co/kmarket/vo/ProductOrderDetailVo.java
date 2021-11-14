@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProductOrderDetailVo {
-	
+
 	private int seq;
 	private int orderId;
 	private int productCode;
@@ -28,6 +28,4 @@ public class ProductOrderDetailVo {
 	}
 	
 	
-	
-
 }

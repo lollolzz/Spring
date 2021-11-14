@@ -334,19 +334,6 @@ footer p > strong {
     font-size: 17px;
 }
 
-#member-register .btnZip {
-    display: inline-block;
-    width: 100px;
-    height: 27px;
-    font-size: 15px;
-     margin-top: 6px;
-    border: 1px solid #dfe5ed;
-    vertical-align: middle;
-    cursor: pointer;
-    border-radius: 2px;
-    
-}
-
 #member-register table .addr input {
     margin-top: 6px;
 }
@@ -454,18 +441,6 @@ footer p > strong {
     color: #ef3f43;
     vertical-align: middle;
     margin-right: 5px;
-}
-#member-register-seller .btnZip {
-    display: inline-block;
-    width: 100px;
-    height: 27px;
-    font-size: 15px;
-     margin-top: 6px;
-    border: 1px solid #dfe5ed;
-    vertical-align: middle;
-    cursor: pointer;
-    border-radius: 2px;
-    
 }
 
 #member-register-seller form input[type=submit] {

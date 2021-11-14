@@ -4,14 +4,12 @@ import lombok.Data;
 
 @Data
 public class MemberPointVo {
-	
 	private int pointId;
 	private String uid;
 	private int productCode;
 	private int price;
 	private int point;
 	private String rdate;
-	
 	public int getPointId() {
 		return pointId;
 	}
@@ -48,7 +46,5 @@ public class MemberPointVo {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	
 	
 }

@@ -1,21 +1,22 @@
 package kr.co.kmarket.vo;
 
+import lombok.Data;
+
+@Data
 public class ProductCate2Vo {
-	
-	private String cate1;
-	private String cate2;
+	private int cate1;
+	private int cate2;
 	private String title;
-	
-	public String getCate1() {
+	public int getCate1() {
 		return cate1;
 	}
-	public void setCate1(String cate1) {
+	public void setCate1(int cate1) {
 		this.cate1 = cate1;
 	}
-	public String getCate2() {
+	public int getCate2() {
 		return cate2;
 	}
-	public void setCate2(String cate2) {
+	public void setCate2(int cate2) {
 		this.cate2 = cate2;
 	}
 	public String getTitle() {
@@ -26,5 +27,5 @@ public class ProductCate2Vo {
 	}
 	
 	
-
+	
 }

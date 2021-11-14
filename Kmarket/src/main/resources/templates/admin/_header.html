@@ -1,18 +1,11 @@
 <header>
     <div>
         <a th:href="@{/admin}" class="logo"><img th:src="@{/admin/img/admin_logo.png}" alt="admin_logo"/></a>
-    <p>
-    	<th:block th:if= "${session.sessMember} != null">
-        	<span>[[${session.sessMember.uid}]]님 반갑습니다.</span>
-        </th:block>
-        <a th:href="@{/index}">HOME |</a>
-        <th:block th:if= "${session.sessMember} == null">
-        	<a th:href="@{/member/login}" class="logout">로그인 |</a>
-        </th:block>
-        <th:block th:if= "${session.sessMember} != null">
-        	<a th:href="@{/member/logout}" class="logout">로그아웃 |</a>
-        </th:block>
-        <a href="#">고객센터 |</a>
-   </p>
-	</div>
+        <p>
+            <span>[[${session.sessMember.manager}]]님 반갑습니다.</span>
+            <a th:href="@{/}">HOME |</a>
+            <a th:href="@{/member/logout}">로그아웃 |</a>
+            <a href="#">고객센터</a>
+        </p>
+    </div>
 </header>

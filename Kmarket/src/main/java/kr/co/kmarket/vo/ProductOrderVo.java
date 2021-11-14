@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ProductOrderVo {
+
 	private int orderId;
 	private String uid;
 	private int count;
@@ -18,10 +19,34 @@ public class ProductOrderVo {
 	private String zip;
 	private String addr1;
 	private String addr2;
-	private String payment;
-	private String complete;
+	private int payment;
+	private int complete;
 	private String rdate;
 	private String completeDate;
+	
+	// 추가필드I
+	private int[] cartIds;
+	private int[] productCodes;
+	private int[] productCounts;
+	
+	// 추가필드II
+	private int productCode;
+	private int pCount;
+	private int cate1;
+	private int cate2;
+	private String thumb1;
+	private String pName;
+	private int pPrice;
+	private int pDiscount;
+	private int pPoint;
+	private int pDelivery;
+	private int salePrice;
+	private String uName;
+	private String uHp;
+	private String uZip;
+	private String uAddr1;
+	private String uAddr2;
+	private int uPoint;
 	public int getOrderId() {
 		return orderId;
 	}
@@ -106,16 +131,16 @@ public class ProductOrderVo {
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
-	public String getPayment() {
+	public int getPayment() {
 		return payment;
 	}
-	public void setPayment(String payment) {
+	public void setPayment(int payment) {
 		this.payment = payment;
 	}
-	public String getComplete() {
+	public int getComplete() {
 		return complete;
 	}
-	public void setComplete(String complete) {
+	public void setComplete(int complete) {
 		this.complete = complete;
 	}
 	public String getRdate() {
@@ -130,6 +155,145 @@ public class ProductOrderVo {
 	public void setCompleteDate(String completeDate) {
 		this.completeDate = completeDate;
 	}
-
+	public int[] getCartIds() {
+		return cartIds;
+	}
+	public void setCartIds(int[] cartIds) {
+		this.cartIds = cartIds;
+	}
+	public int[] getProductCodes() {
+		return productCodes;
+	}
+	public void setProductCodes(int[] productCodes) {
+		this.productCodes = productCodes;
+	}
+	public int[] getProductCounts() {
+		return productCounts;
+	}
+	public void setProductCounts(int[] productCounts) {
+		this.productCounts = productCounts;
+	}
+	public int getProductCode() {
+		return productCode;
+	}
+	public void setProductCode(int productCode) {
+		this.productCode = productCode;
+	}
+	public int getpCount() {
+		return pCount;
+	}
+	public void setpCount(int pCount) {
+		this.pCount = pCount;
+	}
+	public int getCate1() {
+		return cate1;
+	}
+	public void setCate1(int cate1) {
+		this.cate1 = cate1;
+	}
+	public int getCate2() {
+		return cate2;
+	}
+	public void setCate2(int cate2) {
+		this.cate2 = cate2;
+	}
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public int getpPrice() {
+		return pPrice;
+	}
+	public void setpPrice(int pPrice) {
+		this.pPrice = pPrice;
+	}
+	public int getpDiscount() {
+		return pDiscount;
+	}
+	public void setpDiscount(int pDiscount) {
+		this.pDiscount = pDiscount;
+	}
+	public int getpPoint() {
+		return pPoint;
+	}
+	public void setpPoint(int pPoint) {
+		this.pPoint = pPoint;
+	}
+	public int getpDelivery() {
+		return pDelivery;
+	}
+	public void setpDelivery(int pDelivery) {
+		this.pDelivery = pDelivery;
+	}
+	public int getSalePrice() {
+		return salePrice;
+	}
+	public void setSalePrice(int salePrice) {
+		this.salePrice = salePrice;
+	}
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public String getuHp() {
+		return uHp;
+	}
+	public void setuHp(String uHp) {
+		this.uHp = uHp;
+	}
+	public String getuZip() {
+		return uZip;
+	}
+	public void setuZip(String uZip) {
+		this.uZip = uZip;
+	}
+	public String getuAddr1() {
+		return uAddr1;
+	}
+	public void setuAddr1(String uAddr1) {
+		this.uAddr1 = uAddr1;
+	}
+	public String getuAddr2() {
+		return uAddr2;
+	}
+	public void setuAddr2(String uAddr2) {
+		this.uAddr2 = uAddr2;
+	}
+	public int getuPoint() {
+		return uPoint;
+	}
+	public void setuPoint(int uPoint) {
+		this.uPoint = uPoint;
+	}
+	
+	
+	
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

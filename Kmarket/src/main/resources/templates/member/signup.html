@@ -2,59 +2,64 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>케이마켓::약관</title>
+    <title>케이마켓::약관</title>    
     <link rel="stylesheet" th:href="@{/css/member.css}">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script th:inline="javascript">
-	
     	$(function(){
-			
-			// agree5을 넣어주지 않은 이유는 선택사항이어서 굳이 체크를 하지않아도 상관없기 때문에 제외 시켜줌 
-			
-			// 일반회원 :1 , 판매회원: 2
+    		
+    		// agree5을 넣어주지 않은 이유는 선택사항이어서 굳이 체크를 하지않아도 상관없기 때문에 제외 시켜줌 
+    		
+    		// 일반회원:1, 판매자회원:2
     		var type = "[[${type}]]";
-
-			$('.agree').click(function(){
+    		
+    		$('.agree').click(function(){
+    			
+    			var isChecked1 = $('input[name=agree1]').is(':checked');
+    			var isChecked2 = $('input[name=agree2]').is(':checked');
+    			var isChecked3 = $('input[name=agree3]').is(':checked');
+    			var isChecked4 = $('input[name=agree4]').is(':checked');
 				
-				var isChecked1 = $('input[name=agree1]').is(':checked');
-				var isChecked2 = $('input[name=agree2]').is(':checked');
-				var isChecked3 = $('input[name=agree3]').is(':checked');
-				var isChecked4 = $('input[name=agree4]').is(':checked');
-				
-					if(!isChecked1){
-						alert('이용약관에 동의 하셔야 합니다.');
-						return;// 리턴하지않으면 계속 밑으로 내려가면서 뜬다. 하나만 안되도 리턴해버린다.
-					}
-					if(!isChecked2){
-						alert('전자금융거래 이용약관에 동의 하셔야 합니다.');
-						return;
-					}
-					if(!isChecked3){
-						alert('개인정보 수집 동의 하셔야 합니다.');
-						return;
-					}
-					if(!isChecked4 && type == 2){
-						alert('전자세금 신고납부에 동의 하셔야 합니다.');
-						return;
-					}
-					
-					if(type == 1){
-						//location.href='/member/register';
-						//자바스크립트 이동속성(히스토리에 기록)
-						
-						location.replace('/member/register'); 
-						// 위의 것을 사용하면 register의 전페이지인 signup페이지는 히스토리에 
-						// 남지 않게 되므로 register페이지에서 뒤로가기를 누르면 join페이지로 간다 
-					}else{
-						location.replace('/member/register-seller');
-					}
-			});
-	});
+    			if(!isChecked1){
+    				alert('이용약관에 동의 하셔야 합니다.');
+    				return;// 리턴하지않으면 계속 밑으로 내려가면서 뜬다. 하나만 안되도 리턴해버린다.
+    			}
+    			
+    			if(!isChecked2){
+    				alert('전자금융거래 이용약관에 동의 하셔야 합니다.');
+    				return;
+    			}
+    			
+    			if(!isChecked3){
+    				alert('개인정보 수집에 동의 하셔야 합니다.');
+    				return;
+    			}
+    			
+    			if(!isChecked4 && type == 2){
+    				alert('전자세금 신고납부에 동의 하셔야 합니다.');
+    				return;
+    			}
+    			
+    			if(type == 1){
+    				// 자바스크립트 이동속성(히스토리 기록)
+    				//location.href = '/member/register';
+    				
+    				// 자바스크립트 이동함수(히스토리 기록안됨)
+    				location.replace('/member/register');
+    				// 위의 것을 사용하면 register의 전페이지인 signup페이지는 히스토리에 
+					// 남지 않게 되므로 register페이지에서 뒤로가기를 누르면 join페이지로 간다
+    			}else{    				
+    				//location.href = '/member/register-seller';
+    				location.replace('/member/register-seller');
+    			}
+    		});
+    	});
     </script>
+    
 </head>
 <body>
     <div id="member-wrapper">
-       <th:block th:include="@{/member/_header.html}"></th:block>
+        <th:block th:include="@{/member/_header.html}"/>
         <main>
             <div id="member-signup">
 				<h1>약관동의</h1>
@@ -72,28 +77,24 @@
 					<label><input type="checkbox" name="agree3" />동의합니다.</label>
 				</section>
 				
-				<!-- join페이지에서 일반회원, 판매자를 구분하기 위하여 type==1 or 2를 설정하여 주었
-				아래는 seller회원 가입시필요한 항목이기 때문에 th:if="${type==2}이렇게 설정 해줌   -->
 				<section th:if="${type==2}">
 					<h3><span class="essential">(필수)</span>전자세금 신고납부 이용약관</h3>
 					<textarea class="location" readonly>[[${memberTermsVo.tax}]]</textarea>
 					<label><input type="checkbox" name="agree4" />동의합니다.</label>
 				</section>
-				
+
 				<section>
 					<h3><span class="optional">(선택)</span>위치정보 이용약관</h3>
 					<textarea class="location" readonly>[[${memberTermsVo.location}]]</textarea>
 					<label><input type="checkbox" name="agree5" />동의합니다.</label>
 				</section>
-
+				
 				<div>
 					<input type="button" class="agree" value="동의하기" />
-					<!-- button태그의 기능은 input type="button" 가 똑같다 굳이 구분 할 필요가 없다
-					<button>동의하기</button> -->
 				</div>
             </div>
-        </main>        
-        <th:block th:include="@{/member/_footer.html}"></th:block>
-    </div>    
+        </main>
+        <th:block th:include="@{/member/_footer.html}"/>
+    </div>
 </body>
 </html>

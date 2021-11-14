@@ -12,112 +12,61 @@
     <link rel="stylesheet" th:href="@{/admin/css/admin.css}">
     <script>
     
-    	$(function() {
-	
-			var select1 = $('select[name=cate1]');
-			var select2 = $('select[name=cate2]');
-
-		// 1차 카테고리 생성
-		/*$.ajax({
-			url: '/admin/product/cate1',
-			type: 'get', //카테고리데이터만 요청하면 되기때문에 get사용 
-			dataType: 'json',
-			success: function(data){// json자료가 function(data)으로 들어온다} });*/
-		
-		$.get('/admin/product/getCate1', function(data){
-			
-			/* 카테고리 목록 불러오기 
-			for(var i=0 ; i<data.length ; i++){
-				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>")
-			}
-			
-			아래의 data는 List<CategoriesVo>를 나타내고 각각의 데이터를 반복한다는 문구이다,, index번호는 i로 들어간다 
-			*/
-			$.each(data, function(i, vo){
-				select1.append("<option value='"+vo.cate1+"'>"+vo.title+"</option>")
+    	$(function(){
+    		
+    		var select1 = $('select[name=cate1]');
+    		var select2 = $('select[name=cate2]');
+    		
+    		// 1차 카테고리 생성
+    		/*$.ajax({
+    			url: '/admin/product/cate1',
+    			type: 'get', //카테고리데이터만 요청하면 되기때문에 get사용 
+    			dataType: 'json',
+    			success: function(data){// json자료가 function(data)으로 들어온다} });*/
+    		
+    		$.get('/admin/product/getCate1', function(data){
+    			
+    			/* 카테고리 목록 불러오기 
+    			for(var i=0 ; i<data.length ; i++){
+    				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>")
+    			}
+    			
+    			아래의 data는 List<CategoriesVo>를 나타내고 각각의 데이터를 반복한다는 문구이다,, index번호는 i로 들어간다 
+    			*/
+    			$.each(data, function(i, vo){
+    				select1.append("<option value='"+vo.cate1+"'>"+vo.title+"</option>")
+    				
+    			});	
+    		});	
+    		
+    		// 1차 카테고리 선택 후 2차 카테고리 생성
+    		select1.change(function(){
 				
-			});	
-		});	
-		
-		// 1차 카테고리 선택 후 2차 카테고리 생성
-		select1.change(function() {
-			
-			// 1차 선택 후 2차 카테고리를 선택하게 도와주는 문구
-
-			var cate1 = $(this).val();
-    		var jsonData = {'cate1': cate1};
-			
-			$.get('/admin/product/getCate2', jsonData, function(data){
-				
-				select2.empty();
-    			select2.append("<option value='0'>2차 분류 선택</option>");
-				
-				$.each(data, function(i, vo){
-        			select2.append("<option value='"+vo.cate2+"'>"+vo.title+"</option>");
-        		});
-			
-			});
-	
-		});
-	});	
- 
-    </script>    
+    			var cate1 = $(this).val();
+    			var jsonData = {'cate1': cate1};
+    			
+    			$.get('/admin/product/getCate2', jsonData, function(data){
+    				
+    				select2.empty();
+    				select2.append("<option value='0'>2차 분류 선택</option>");
+    				
+    				$.each(data, function(i, vo){
+        				select2.append("<option value='"+vo.cate2+"'>"+vo.title+"</option>");
+        			});    				
+    			});
+    		});
+    	});
+    </script>
+    
+    
 </head>
 <body>
     <div id="admin-wrapper">
-         <th:block th:include="@{/admin/_header.html}"></th:block>
+        <th:block th:include="@{/admin/_header.html}"/>
         <main>
             <aside>
                 <!-- Global Navigation Bar -->
-                <ul id="gnb">
-                    <li>
-                        <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
-                        <ol>
-                            <li><a href="#">기본환경설정</a></li>
-                            <li><a href="#">배너관리</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
-                        <ol>
-                            <li><a href="#">판매자현황</a></li>
-                            <li><a href="#">재고관리</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
-                        <ol>
-                            <li><a href="#">회원현황</a></li>
-                            <li><a href="#">포인트관리</a></li>
-                            <li><a href="#">비회원관리</a></li>
-                            <li><a href="#">접속자집계</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
-                        <ol>
-                            <li><a href="#">상품현황</a></li>
-                            <li><a href="#">상품등록</a></li>
-                            <li><a href="#">재고관리</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
-                        <ol>
-                            <li><a href="#">주문현황</a></li>
-                            <li><a href="#">매출현황</a></li>
-                            <li><a href="#">결제관리</a></li>
-                            <li><a href="#">배송관리</a></li>
-                        </ol>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
-                        <ol>
-                            <li><a href="#">게시판현황</a></li>
-                            <li><a href="#">고객문의</a></li>
-                        </ol>
-                    </li>
-                </ul>
+                <th:block th:include="@{/admin/_gnb.html}"/>
             </aside>
             <section id="admin-product-register">
                 <nav>
@@ -142,7 +91,7 @@
                                     <td>1차 분류</td>
                                     <td>
                                         <select name="cate1">
-                                            <option value="0">1차 분류 선택</option>
+                                            <option value="0">1차 분류 선택</option>                                                                                            
                                         </select>
                                     </td>
                                 </tr>
@@ -150,7 +99,7 @@
                                     <td>2차 분류</td>
                                     <td>
                                         <select name="cate2">
-                                            <option value="0">2차 분류 선택</option>                                               
+                                            <option value="0">2차 분류 선택</option>                                                                                            
                                         </select>
                                     </td>
                                 </tr>
@@ -165,16 +114,14 @@
                             </p>
                             <table>
                                 <tr>
-                                  <!-- 아래의 각 항목마다 이름을 지정해주어야 한다 why? DB에 설정되어져 있는 이름 값들과 값을 일치
-                                  시켜주어야 정상적으로 데이터베이스에 업로드가 되기 때문이다 -->
                                     <td>상품명</td>
                                     <td><input type="text" name="name"/></td>
                                 </tr>
                                 <tr>
                                     <td>기본설명</td>
                                     <td>
-                                        <input type="text" name="descript"/>
                                         <span>상품명 하단에 상품에 대한 추가적인 설명이 필요한 경우에 입력</span>
+                                        <input type="text" name="descript"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -188,8 +135,8 @@
                                 <tr>
                                     <td>할인율</td>
                                     <td>
-                                        <input type="text" name="discount" value="0"/>원
                                         <span>0을 입력하면 할인율 없음</span>
+                                        <input type="text" name="discount" value="0"/>원
                                     </td>
                                 </tr>
                                 <tr>
@@ -201,7 +148,7 @@
                                 </tr>
                                 <tr>
                                     <td>재고수량</td>
-                                    <td><input type="text" name="stcok" value="0"/>개</td>
+                                    <td><input type="text" name="stock" value="0"/>개</td>
                                 </tr>
                                 <tr>
                                     <td>배송비</td>
@@ -240,7 +187,6 @@
                                 [전자상거래에 관한 상품정보 제공에 관한 고시] 항목에 의거 등록해야 되는 정보입니다.
                             </p>
                             <table>
-                               
                                 <tr>
                                     <td>상품상태</td>
                                     <td><input type="text" name="status" value="새상품"/></td>
@@ -260,21 +206,11 @@
                                 <tr>
                                     <td>원산지</td>
                                     <td><input type="text" name="origin" value="국내산"/></td>
-                                </tr>      
-                                <tr>
-                                    <td>품질보증기준</td>
-                                    <td><input type="text" name=""/></td>
                                 </tr>
-                                <tr>
-                                    <td>A/S 책임자와 전화번호</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
-                                <tr>
-                                    <td>주문후 예상 배송기간</td>
-                                    <td><input type="text" name=""/></td>
-                                </tr>
+                                
                             </table>                                
                         </section>
+                        
                         <input type="submit" value="등록하기"/>
                     </form>
                 </article>
@@ -286,7 +222,7 @@
                 <!-- 상품등록 컨텐츠 끝 -->
             </section>
         </main>
-         <th:block th:include="@{/admin/_footer.html}"></th:block>
+        <th:block th:include="@{/admin/_footer.html}"/>
     </div>    
 </body>
 </html>

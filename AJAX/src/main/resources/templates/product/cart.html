@@ -15,10 +15,124 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="shortcut icon" href="@{/img/favicon.ico}">
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <script th:src="@{/js/jsscript.js}"></script>
+    <script src="/js/jsscript.js"></script>
+    <script>
+    	////////////////////////////////////////////////////////
+    	// 장바구니 전체 집계함수
+    	function aggregation(){
+    		
+    		var cartProduct = $('.cart-product');
+    		
+    		// 상품 수 집계
+    		var totCount = 0;
+    		
+    		$.each(cartProduct, function(){
+    			
+    			var value = $(this).find('input[name=count]').val();
+    			var count = parseInt(value);
+    			totCount += count;
+    		});
+    		
+    		
+    		$('.cart-table .count').text(totCount+'개');
+    		
+
+    		// 배송 비 집계
+    		var totDelivery = 0;
+    		
+    		
+    		$.each(cartProduct, function(){
+    			
+    			var value = $(this).find('input[name=delivery]').val();
+    			var delivery = parseInt(value);
+    			totDelivery += delivery;
+    		});
+    		
+    		
+    		$('.cart-table .delivery').text(totDelivery.toLocaleString()+'원');
+    		
+    		
+    		
+    		// 상품 총 가격
+    		var totPrice = 0;
+    		
+    		
+    		$.each(cartProduct, function(){
+    			console.log('agg -- 7');
+    			var value = $(this).find('input[name=price]').val();
+    			var price = parseInt(value);
+    			totPrice += price;
+    			
+    		});
+    		
+    		$('.cart-table .total').text(totPrice.toLocaleString()+'원');
+
+    	}// aggregation end
+    	
+    	$(function(){
+    		aggregation();
+    		
+    		// 주문하기
+    		$('input[name=order]').click(function(){
+    			
+				var checkedProduct = $('input[name=checkProduct]:checked');
+				var cartIds = [];
+    			var productCodes  = [];
+    			var productCounts = [];
+    			// 배열로 선언한 이유는 ? 만약의 두개의 상품을 함께 주문한다면
+				// 한 번의 주문 으로 취급되어 하나의 list화 되어 DB에 들어가기 때문에
+				// 배열로 한다 
+    			
+    			$.each(checkedProduct, function(){
+    				var cartId = $(this).val();
+    				var productCode  = $(this).data('product-code');
+    				var productCount = $(this).data('product-count');
+    				
+    				cartIds.push(cartId);
+    				productCodes.push(productCode);
+    				productCounts.push(productCount);
+    			});
+    			
+    			var uid      = $('.info input[name=uid]').val();
+    			var count    = $('.info .count').text().replace(/(,|개)/g, '');
+    			var price    = $('.info .price').text().replace(/(,|원)/g, '');
+    			var delivery = $('.info .delivery').text().replace(/(,|원)/g, '');
+    			var total    = $('.info .total').text().replace(/(,|원)/g, '');
+    			
+    			var jsonData = {
+    				'uid': uid,
+    				'count': count,
+    				'price': price,
+    				'delivery': delivery,
+    				'total': total,
+    				'productCodes': productCodes,
+    				'productCounts': productCounts,
+    				'cartIds': cartIds
+    				};
+    			
+    			console.log(JSON.stringify(jsonData));
+    			
+    			$.ajax({
+    				url: '/product/order',
+    				type: 'post',
+    				traditional: true, 
+    				data: jsonData,
+    				dataType:'json',
+    				success: function(data){
+    					//alert(data.orderId);
+    					// 주문 페이지로 이동
+    					var orderId = data.orderId;
+    					location.href='/product/order?orderId='+orderId;
+    				}
+    			});
+    			
+    		});
+    	});
+    		
+</script>	
 </head>
 <body>
     <div id="payment-wrapper">
@@ -27,36 +141,45 @@
             <section class="cart-center1" style="background-color: rgb(236, 239, 241);">        
                 <div class = "payment-center-header">
                     <li>
-                    <a href="#"><i class="fa fa-check-square" aria-hidden="true"></i></a>
-                    <span>쇼핑백</span> 
+	                    <a href="#"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+	                    <span>쇼핑백</span> 
                     </li>
                     <li>
-                    <a th:href="@{/product/delivery}"><i class="fa fa-square" aria-hidden="true"></i></a>
-                    <span> 배송</span>
+	                    <a th:href="@{/product/delivery}"><i class="fa fa-square" aria-hidden="true"></i></a>
+	                    <span> 배송</span>
                     </li>
                     <li>
-                    <a th:href="@{/product/payment}"><i class="fa fa-square" aria-hidden="true"></i></a>
-                    <span> 결제</span>
-                    <div>
-                    </li>
-                     
+	                    <a th:href="@{/product/payment}"><i class="fa fa-square" aria-hidden="true"></i></a>
+	                    <span> 결제</span>
+                    </li>                    
                 </div>
                 <div class="cart-center">
                     <div class="cart-center-left">
-                        <div class="cart-product">
+                    	<div class="cart-allCheck">
+                    		<input type="checkbox" name="allCheck" class="in-cart-allCheck" /><label for="allCheck">모두 선택</label>
+                    		<button type="button" class="in-cart-selectCheck">선택 삭제</button>  
+                    	</div>
+                    	<!-- <div class="cart-selectCheck">
+							   
+							</div> -->
+                        <div th:each="product:${cartProducts}" class="cart-product">
+                        	<input type="hidden" name="count" th:value="${product.count}"/>
+                        	<input type="hidden" name="delivery" th:value="${product.delivery}"/>
+                        	<input type="hidden" name="price" th:value="${product.price}"/>
                             <div class="cart-product-left">
+                            	<input type="checkbox" name="chBox" class="cart-chBox"/>
                                 <a href="#">
-                                    <img src="../img/sampleImg.avif">
+                                    <img th:src="@{/thumb/{cate1}/{cate2}/{img}(cate1=${product.cate1}, cate2=${product.cate2}, img=${product.thumb1})}" alt="상품 이미지"/>
                                 </a>
                             </div>
-                            <!-- <div th:each="product:${cartProducts}" class="cart-product-right"> -->
                             <div class="cart-product-right">
-                            	<!-- <div>[[${product.name}]]</div> -->
-                                <div>(여성)점프 서브 슬립 캔버스 스니커즈</div>
-                                <div>사이즈 : 240</div>
-                                <!-- <div class="cart-price">[[${#numbers.formatInteger(product.price, 3, 'COMMA')}]]</div>  -->
-                                <div>139,000원</div>
-                                <select>
+                            	<div class="name">[[${product.name}]]</div>
+                                <div class="count">상품 수 :[[${product.count}]]</div>
+                                <div class="delivery" th:if="${product.delivery == 0}">무료배송</div>
+                                <div class="delivery" th:if="${product.delivery != 0}">배송 비 :[[${product.delivery}]]</div>
+                                <div class="cart-price">상품 가격 :[[${#numbers.formatInteger(product.price, 3, 'COMMA')}]]원</div>
+                                <input type="button" name="del" value="삭제">
+                               <select>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -83,29 +206,26 @@
                         </div>
                     </div>
                     <div class="cart-center-right">
-
                         <div class="cart-payment">
                             <table class="cart-table">
                                 <tbody>
                                     <tr>
-                                    <td>1개상품</td>
-                                    <td>139,000원</td>
-                                    <!-- <td class=class="cart-price"> [[${#numbers.formatInteger(product.price, 3, 'COMMA')}]]  -->
+                                    <td>상품수</td>
+                                    <td class="count"></td>
                                     </tr>
                                     <tr>
                                     <td>배송비</td>
-                                    <td>0원</td>
-                                    <!-- <td class="cart-delivery" th:if="${product.delivery == 0}">무료배송</td>
-                        				 <td class="cart-delivery" th:if="${product.delivery != 0}">[[${#numbers.formatInteger(product.delivery, 3, 'COMMA')}]]</td> -->
+                                    <td class="delivery"></td>
+
                                     </tr>
                                     <tr>
                                     <td>총 상품금액</td>
-                                    <td>139,000원</td>
-                                    <!-- <td class="cart-total">[[${#numbers.formatInteger(product.total, 3, 'COMMA')}]]</td> -->
+                                    <td class="total"></td>
+
                                     </tr>
                                 </tbody>
                             </table>        
-                            <input type="button" style="background-color:darkseagreen; border-color:white;" value="주문하기">
+                            <input type="button" name="cart-payment" style="background-color:darkseagreen; border-color:white;" value="주문하기">
                         </div>
                     </div>
                 </div>

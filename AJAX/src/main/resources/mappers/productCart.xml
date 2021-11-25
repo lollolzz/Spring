@@ -6,8 +6,23 @@
 
 	<insert id="insertCart"></insert>
 	<select id="selectCart"></select>
-	<select id="selectCarts"></select>
-	<select id="selectCountCart"></select>
+	<select id="selectCarts" resultType="kr.co.ajax.vo.ProductVo">
+		SELECT a.*, b.total, b.count 
+		FROM `aj_product` AS a
+		JOIN `aj_product_cart` AS b
+		ON a.productCode = b.productCode
+		WHERE b.uid =#{uid}
+		ORDER BY `cartId`;
+	</select>
+	<select id="selectCountCart" resultType="int">
+		SELECT COUNT(`cartId`) FROM `aj_product_cart` WHERE `uid`=#{uid} AND `productCode`=#{productCode};
+	</select>
 	<update id="updateCart"></update>
-	<delete id="deleteCart"></delete>
+	<delete id="deleteCart">
+		DELETE FROM `aj_product_cart` 
+		WHERE `cartId` IN
+		<foreach collection="array" item="cartId" open="(" close=")" separator=",">
+			#{cartId}
+		</foreach>
+	</delete>
 </mapper>

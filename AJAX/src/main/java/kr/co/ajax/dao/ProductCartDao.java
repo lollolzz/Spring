@@ -12,7 +12,7 @@ public interface ProductCartDao {
 
 	public void insertCart(ProductCartVo vo);
 	public void selectCart();
-	public List<ProductVo> selectCarts(String uid);
+	public List<ProductCartVo> selectCarts(String uid);
 	public int selectCountCart(ProductCartVo vo);
 	public void updateCart();
 	public int deleteCart(int[] cartIds);

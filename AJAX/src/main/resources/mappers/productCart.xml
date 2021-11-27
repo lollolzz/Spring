@@ -3,11 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ajax.dao.ProductCartDao">
-
-	<insert id="insertCart"></insert>
+	<insert id="insertCart">
+		INSERT INTO `aj_product_cart` SET
+			`uid`=#{uid}, 
+			`productCode`=#{productCode}, 
+			`count`=#{count}, 
+			`price`=#{price},  
+			`delivery`=#{delivery}, 
+			`total`=#{total}, 
+			`rdate`=NOW();
+	</insert>
 	<select id="selectCart"></select>
-	<select id="selectCarts" resultType="kr.co.ajax.vo.ProductVo">
-		SELECT a.*, b.total, b.count 
+	<select id="selectCarts" resultType="kr.co.ajax.vo.ProductCartVo">
+		SELECT b.*, a.name, a.cate1, a.cate2, a.thumb1 
 		FROM `aj_product` AS a
 		JOIN `aj_product_cart` AS b
 		ON a.productCode = b.productCode

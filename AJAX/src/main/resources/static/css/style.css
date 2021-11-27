@@ -42,11 +42,10 @@ header {
   box-sizing: border-box;
   background-color: rgb(255, 255, 255);
   z-index: 100;
-  border: 1px solid red;
 }
 
 header > div {
-  width: 1360px;
+  width: 1260px;
   height: 90px;
   box-sizing: border-box;
   margin: 0 auto;
@@ -135,15 +134,49 @@ header > nav > div > div > ol > li {
     padding-bottom: 0;
   }
 }
+
+.MainBanner{
+    position: relative;
+    width: 100%; 
+    height: 98%;
+
+}
+
 .MainBanner > ul{
   list-style: none;
   padding-left: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /*범위에 넘치는 것들을 숨겨주는 기능 */
+  /*애니메이션 화를 시키기 위해서는 1번 그림 옆으로 정렬되어 있어야 한다*/
 }
+
+.MainBanner > ul > li {
+
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
 .bannerimg{
   width: 100%;
   height: 100%;
   margin-top: 77px;
 }
+
+/* 세로정렬이 아닌 가로 정렬을 해야 옆에서 넘어오는 슬라이드 애니메이션이 가능하기 때문에 아래와 같이 자리를 설정해줌 */
+.MainBanner > ul > li:nth-child(1) {left: 0;}
+.MainBanner > ul > li:nth-child(2) {left: 100%;}
+.MainBanner > ul > li:nth-child(3) {left: 200%;}
+
+.MainBanner > img {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+}
+
 /* Tick */
 .page-section {
   padding-top: 100px;
@@ -1470,7 +1503,7 @@ color : rgb(68, 67, 67);
 
 #ABOUTUS {
   margin: 0 auto;
-  margin-top: 150px;
+  margin-top: 120px;
   padding: 16px;
   box-sizing: border-box;
 }
@@ -2556,6 +2589,10 @@ font-size: 13px;
 
 }
 
+.cart-checkProduct{
+	text-align: left;
+}
+
 .customer {
   width: 100%;
   height: 200px;
@@ -2598,7 +2635,7 @@ font-size: 13px;
 
 .cart-allCheck{
 	text-align: left;
-    padding-bottom: 8px;
+    padding-bottom: 15px;
 }
 .cart-allCheck > label{
 	font-size: 1.3rem;
@@ -2618,10 +2655,16 @@ font-size: 13px;
     padding: 2px 5px;
 }
 
+.in-cart-del{
+	float: right;
+	padding: 5px;
+}
+
 .cart-center-right {
   float: right;
   width: 35%;
   height: 100%;
+  margin-top : 33px;
   box-sizing: border-box;
   
 }
@@ -2635,7 +2678,7 @@ font-size: 13px;
 .cart-product-left {
   float: left;
   width: 30%;
-  height: 100%;
+  height: 93%;
   box-sizing: border-box;
 }
 
@@ -2645,8 +2688,8 @@ font-size: 13px;
 
 .cart-product-left > a > img {
   width: 116px;
-  height: 138px;
-  margin-top: 24px;
+  height: 158px;
+  margin-top: 10px;
 }
 
 .cart-product-right {

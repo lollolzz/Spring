@@ -22,6 +22,7 @@ public class ProductCartVo {
 	private int cate2;
 	private String name;
 	private String thumb1;
+	
 	public int getCartId() {
 		return cartId;
 	}

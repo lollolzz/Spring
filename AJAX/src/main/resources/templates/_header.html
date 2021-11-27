@@ -19,7 +19,7 @@
        		 </th:block>
 			 <th:block th:if= "${session.sessMember} != null">
         	 	<li><a th:href="@{/member/logout}"><i class="fa fa-sign-out" style="color: darkslategray"></i></a></li>
-        	 	<li><a th:href="@{/product/cart(uid=${session.sessMember.uid})}"><i class="fas fa-shopping-cart fa-lg" style="color: darkslategray"></i></a></li>
+        	 	<li><a th:href="@{/product/cart}"><i class="fas fa-shopping-cart fa-lg" style="color: darkslategray"></i></a></li>
        		 </th:block> 
  		     <!-- <th:block th:if= "${session.sessMember} != null">
         	 	

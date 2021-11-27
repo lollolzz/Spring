@@ -23,7 +23,7 @@ public class ProductCartService {
 	}
 	public void selectCart() {};
 	
-	public List<ProductVo> selectCarts(String uid) {
+	public List<ProductCartVo> selectCarts(String uid) {
 		return dao.selectCarts(uid);
 	};
 	

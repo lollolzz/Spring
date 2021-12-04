@@ -70,7 +70,7 @@
                   // 수정 관련 주석 3
                   // controller에서 return받은 json데이터를 ajax통신을 이용하여 출력한다.
                    $.ajax({
-                      url: '/board/completeComment',
+                      url: '/Famrstory/board/completeComment',
                       type: 'post',
                       data: jsonData,   // 서버로 전송하는 데이터(JSON) 지정
                       dataType: 'json', // 서버로 부터 전달되는 데이터 종류
@@ -103,8 +103,8 @@
 </head>
 <body>
     <div id="wrapper">
-      <th:block th:include="@{/_header.html}"></th:block>
-      <th:block th:include="@{/board/_aside__${group}__.html}"></th:block>
+      <th:block th:include="@{_header.html}"></th:block>
+      <th:block th:include="@{board/_aside__${group}__.html}"></th:block>
         <section id="board" class="view">
             <h3>글보기</h3>
             <table>
@@ -168,7 +168,7 @@
             </section>
 
         </section>
-         <th:block th:include="/_footer.html"></th:block>
+         <th:block th:include="_footer.html"></th:block>
     </div>    
 </body>
 </html>

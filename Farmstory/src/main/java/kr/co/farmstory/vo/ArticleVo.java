@@ -2,11 +2,6 @@ package kr.co.farmstory.vo;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class ArticleVo {
 	
 	private int seq;
@@ -25,20 +20,6 @@ public class ArticleVo {
 	
 	// 추가필드
 	private MultipartFile fname;
-	
-	private String nick;
-	
-	private FileVo fileVo;
-	
-	public String getGroup() {
-		return group;
-	}
-
-	public void setGroup(String group) {
-		this.group = group;
-	}
-
-	private String group;
 	
 	public int getSeq() {
 		return seq;
@@ -151,5 +132,11 @@ public class ArticleVo {
 	public void setFileVo(FileVo fileVo) {
 		this.fileVo = fileVo;
 	}
+
+	private String nick;
+	
+	private FileVo fileVo;
+	
+	
 	
 }

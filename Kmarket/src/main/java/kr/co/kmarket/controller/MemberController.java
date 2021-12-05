@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.kmarket.service.MemberService;
 import kr.co.kmarket.vo.MemberTermsVo;
@@ -27,8 +28,6 @@ public class MemberController {
 	
 	@GetMapping("/member/login")
 	public String login(String productCode, String success, Model model) {
-		
-		//int success로 하면 null값이 들어 올 수 있어서 String으로 해야한다.
 		model.addAttribute("productCode", productCode);
 		model.addAttribute("success", success);
 		return "/member/login";

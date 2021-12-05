@@ -20,7 +20,6 @@ public class ProductOrderService {
 	public void insertOrderDetail(int orderId, int productCode, int count) {
 		dao.insertOrderDetail(orderId, productCode, count);
 	}
-	
 	public List<ProductOrderVo> selectOrders(int orderId){
 		return dao.selectOrders(orderId);
 	}
@@ -29,5 +28,4 @@ public class ProductOrderService {
 		return dao.updateOrder(vo);
 	}
 	public void deleteOrder() {}
-	
 }

@@ -57,17 +57,17 @@
     			
     			if(top > 0 && !isRecommendOk){
     				// 추천상품 요청하기
-    				getProducts('/getMainProduct?order=score', sectionRecommend);
+    				getProducts('/Kmarket/getMainProduct?order=score', sectionRecommend);
     				isRecommendOk = true;
     				
     			}else if(top > 1000 && !isLatestOk){
     				// 최신상품 요청하기
-    				getProducts('/getMainProduct?order=rdate', sectionNew);
+    				getProducts('/Kmarket/getMainProduct?order=rdate', sectionNew);
     				isLatestOk = true;
     				
     			}else if(top > 1500 && !isDiscountOk){
     				// 할인상품 요청하기
-    				getProducts('/getMainProduct?order=discount', sectionDiscount);
+    				getProducts('/Kmarket/getMainProduct?order=discount', sectionDiscount);
     				isDiscountOk = true;
     			}
     		});
@@ -83,12 +83,8 @@
 					// article 상품정보 출력
 					$.each(data, function(i, productVo){
 						
-						/* 한 article(출력 페이지에서 한 상품이 가지고 있는 마지막 article 부분
-						article.find('.dis_price > strong').remove();)마지막 부분까지를 clone하라는 명령어이다  
-						*/
-						
 						var article = sectionHit.find('article:last-child').clone();
-						article.find('> a').attr('href', '/product/view');
+						article.find('> a').attr('href', '/Kmarket/product/view');
 						article.find('.thumb > img').attr('src', '/thumb/'+productVo.cate1+'/'+productVo.cate2+'/'+productVo.thumb1);
 						article.find('h2').text(productVo.name);
 						article.find('p').text(productVo.descript);

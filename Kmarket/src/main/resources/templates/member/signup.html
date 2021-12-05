@@ -8,8 +8,6 @@
     <script th:inline="javascript">
     	$(function(){
     		
-    		// agree5을 넣어주지 않은 이유는 선택사항이어서 굳이 체크를 하지않아도 상관없기 때문에 제외 시켜줌 
-    		
     		// 일반회원:1, 판매자회원:2
     		var type = "[[${type}]]";
     		
@@ -22,7 +20,7 @@
 				
     			if(!isChecked1){
     				alert('이용약관에 동의 하셔야 합니다.');
-    				return;// 리턴하지않으면 계속 밑으로 내려가면서 뜬다. 하나만 안되도 리턴해버린다.
+    				return;
     			}
     			
     			if(!isChecked2){
@@ -45,12 +43,10 @@
     				//location.href = '/member/register';
     				
     				// 자바스크립트 이동함수(히스토리 기록안됨)
-    				location.replace('/member/register');
-    				// 위의 것을 사용하면 register의 전페이지인 signup페이지는 히스토리에 
-					// 남지 않게 되므로 register페이지에서 뒤로가기를 누르면 join페이지로 간다
+    				location.replace('/Kmarket/member/register');
     			}else{    				
     				//location.href = '/member/register-seller';
-    				location.replace('/member/register-seller');
+    				location.replace('/Kmarket/member/register-seller');
     			}
     		});
     	});
@@ -59,7 +55,7 @@
 </head>
 <body>
     <div id="member-wrapper">
-        <th:block th:include="@{/member/_header.html}"/>
+        <th:block th:include="@{member/_header.html}"/>
         <main>
             <div id="member-signup">
 				<h1>약관동의</h1>
@@ -94,7 +90,7 @@
 				</div>
             </div>
         </main>
-        <th:block th:include="@{/member/_footer.html}"/>
+        <th:block th:include="@{member/_footer.html}"/>
     </div>
 </body>
 </html>

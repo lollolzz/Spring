@@ -36,13 +36,12 @@
     			};
     			
     			$.ajax({
-    				url: '/product/order-complete',
+    				url: '/Kmarket/product/order-complete',
     				type: 'post',
     				data: jsonData,
     				dataType: 'json',
     				success: function(data){
-						    					
-    					location.replace('/product/order-complete');
+    					location.replace('/Kmarket/product/order-complete');
     				}
     			});
     		});

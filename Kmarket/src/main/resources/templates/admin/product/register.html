@@ -18,26 +18,17 @@
     		var select2 = $('select[name=cate2]');
     		
     		// 1차 카테고리 생성
-    		/*$.ajax({
-    			url: '/admin/product/cate1',
-    			type: 'get', //카테고리데이터만 요청하면 되기때문에 get사용 
-    			dataType: 'json',
-    			success: function(data){// json자료가 function(data)으로 들어온다} });*/
-    		
-    		$.get('/admin/product/getCate1', function(data){
-    			
-    			/* 카테고리 목록 불러오기 
+    		$.get('/Kmarket/admin/product/getCate1', function(data){
+    			/*
     			for(var i=0 ; i<data.length ; i++){
-    				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>")
+    				select1.append("<option value='"+data[i].cate1+"'>"+data[i].title+"</option>");    				
     			}
-    			
-    			아래의 data는 List<CategoriesVo>를 나타내고 각각의 데이터를 반복한다는 문구이다,, index번호는 i로 들어간다 
     			*/
     			$.each(data, function(i, vo){
-    				select1.append("<option value='"+vo.cate1+"'>"+vo.title+"</option>")
-    				
-    			});	
-    		});	
+    				select1.append("<option value='"+vo.cate1+"'>"+vo.title+"</option>");
+    			});
+    			
+    		});
     		
     		// 1차 카테고리 선택 후 2차 카테고리 생성
     		select1.change(function(){
@@ -45,7 +36,7 @@
     			var cate1 = $(this).val();
     			var jsonData = {'cate1': cate1};
     			
-    			$.get('/admin/product/getCate2', jsonData, function(data){
+    			$.get('/Kmarket/admin/product/getCate2', jsonData, function(data){
     				
     				select2.empty();
     				select2.append("<option value='0'>2차 분류 선택</option>");
@@ -62,11 +53,11 @@
 </head>
 <body>
     <div id="admin-wrapper">
-        <th:block th:include="@{/admin/_header.html}"/>
+        <th:block th:include="@{admin/_header.html}"/>
         <main>
             <aside>
                 <!-- Global Navigation Bar -->
-                <th:block th:include="@{/admin/_gnb.html}"/>
+                <th:block th:include="@{admin/_gnb.html}"/>
             </aside>
             <section id="admin-product-register">
                 <nav>
@@ -222,7 +213,7 @@
                 <!-- 상품등록 컨텐츠 끝 -->
             </section>
         </main>
-        <th:block th:include="@{/admin/_footer.html}"/>
+        <th:block th:include="@{admin/_footer.html}"/>
     </div>    
 </body>
 </html>

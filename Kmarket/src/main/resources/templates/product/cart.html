@@ -34,28 +34,17 @@
     		var totPrice = 0;
     		
     		$.each(priceTds, function(){
-    			/* parseInt($(this).text().replace(/,/g, '')); -> 가격 계산을 하기 위한것
-				replace를 사용해서 숫자에 적용된 ,를 이부분을(/,) 공백('')으로 바꿔준다
-				예) 35,000 -> 35000 이렇게 바뀌게 되면 문자열로 인식된 숫자를ㄹ
-				parseInt을 사용해서 다시 숫자로 바꿔주워 준다 
-				why??? 숫자 계산을 하기 위하여 사용됨 별 의미없다 외우자 
-			
-			 */ 
     			var price = parseInt($(this).text().replace(/,/g, ''));
     			totPrice += price;
     		});
     		
     		$('.info .price').text(totPrice.toLocaleString()+'원');
-    		// toLocaleString 세자리마다 , 사용하는 메서드 
     		
     		// 할인금액 집계
     		var discountTds = cartProduct.find('.discount');
     		var totDiscount = 0;
     		
     		$.each(discountTds, function(){
-    			// 할인 금액 td에서 집계를 하는 거기 때문에 
-    			// $(this).prev().text() 이부분은 장바구니 페이지에서 보면 할인가격 전의
-    			// td인 판매가의 값을 가져와서 .replace를 적용하고 discount를 하겟다는 문법
     			
     			var price =  parseInt($(this).prev().text().replace(/,/g, ''));
     			var discount = parseInt($(this).text().replace(/,/g, ''));
@@ -132,16 +121,14 @@
     			
     			// 삭제 요청하기
     			$.ajax({
-    				url: '/product/cartDelete',
+    				url: '/Kmarket/product/cartDelete',
     				type: 'get',
     				traditional: true, /* 배열값 전송을 위한 옵션 */
     				data: jsonData,
     				dataType: 'json',
     				success: function(data){
-    					// 다시 장바구니 페이지 요청해서
-    					// 장바구니 화면에서 삭제를 눌렀을때 f5번 누르지 않고도
-    					// 페이지를 요청해서 페이지를 갱신하는 기능
-    					location.href='/product/cart';
+    					// 다시 장바구니 페이지 요청
+    					location.href='/Kmarket/product/cart';
     				}
     			});
     		});
@@ -174,9 +161,6 @@
 				var cartIds = [];
     			var productCodes  = [];
     			var productCounts = [];
-    			// 배열로 선언한 이유는 ? 만약의 두개의 상품을 함께 주문한다면
-				// 한 번의 주문 으로 취급되어 하나의 list화 되어 DB에 들어가기 때문에
-				// 배열로 한다 
     			
     			$.each(checkedProduct, function(){
     				var cartId = $(this).val();
@@ -212,7 +196,7 @@
     			console.log(JSON.stringify(jsonData));
     			
     			$.ajax({
-    				url: '/product/order',
+    				url: '/Kmarket/product/order',
     				type: 'post',
     				traditional: true, 
     				data: jsonData,
@@ -221,7 +205,7 @@
     					//alert(data.orderId);
     					// 주문 페이지로 이동
     					var orderId = data.orderId;
-    					location.href='/product/order?orderId='+orderId;
+    					location.href='/Kmarket/product/order?orderId='+orderId;
     				}
     			});
     			

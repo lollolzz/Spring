@@ -4,7 +4,7 @@
 		var category = $('.category');
 		
 		// 카테고리 요청하기
-		$.get('/getCategories', function(data){
+		$.get('/Kmarket/getCategories', function(data){
 			
 			// 1차 카테고리 생성
 			$.each(data, function(i, catesVo){
@@ -20,7 +20,6 @@
 				if(i == 7) ico = 'fas fa-car';
 				if(i == 8) ico = 'fas fa-book';
 				
-				// 자바스크립트는 멀티라인 기능이 지원되지 않아 아래와 같이 사용하였다.
 				var tag  = "<li>";
                     tag += "<a href='#'><i class='"+ico+"'></i>"+catesVo.tit1+"</a>";
 					tag += "<ol class='cate2s'></ol>";
@@ -30,10 +29,8 @@
 				
 				// 2차 카테고리 생성
 				$.each(catesVo.cate2List, function(j, cate2Vo){				
-					var url = "/product/list?cate1="+cate2Vo.cate1+"&cate2="+cate2Vo.cate2;					
-					$('.cate2s').eq(i).append("<li><a href='"+url+"'>"+cate2Vo.title+"</a></li>");	
-					// .cate2s는 index에서 list들에 마우스를 호버 시켯을때 옆에 나오는 자식 항목들을 지칭하는 class이고 
-					// 위의 문법은 자식항목 + 자식항목 인덱스 순서 + 각 자식 항목들에 대한 링크와 자식항목들의 이름을 나타낸다.									
+					var url = "/Kmarket/product/list?cate1="+cate2Vo.cate1+"&cate2="+cate2Vo.cate2;					
+					$('.cate2s').eq(i).append("<li><a href='"+url+"'>"+cate2Vo.title+"</a></li>");										
 				});
 			});
 		});

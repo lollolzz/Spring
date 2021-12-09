@@ -4,8 +4,21 @@
     <meta charset="UTF-8">
     <title>글보기</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script th:inline="javascript">
+	
+    	var success = [[${success}]]
+			
+	    	if(success == 100){
+	    		alert('아이디와 비밀번호를 확인하세요');
+	    	}else if(success == 101){
+				alert('로그아웃 되었습니다.');
+			}else if(success == 102){
+	    		alert('로그인이 필요합니다.');
+	    	}else if(success == 103){
+	    		alert('글쓰기를 하시려면 로그인하셔야합니다.');
+	    	}
+
           $(document).ready(function(){
              
              // 댓글 삭제
@@ -127,8 +140,10 @@
                 </tr>
             </table>
             <div>
-                <a th:href="@{/board/delete(group=${group},cate=${cate},seq=${articleVo.seq})}" class="btnDelete">삭제</a>
-                <a th:href="@{/board/modify(group=${group},cate=${cate},seq=${articleVo.seq})}" class="btnModify">수정</a>
+            	<th:block th:if= "${session.sessMember == articleVo.uid}">
+	                <a th:href="@{/board/delete(group=${group},cate=${cate},seq=${articleVo.seq})}" class="btnDelete">삭제</a>
+	                <a th:href="@{/board/modify(group=${group},cate=${cate},seq=${articleVo.seq})}" class="btnModify">수정</a>
+                </th:block>
                 <a th:href="@{/board/list(group=${group},cate=${cate})}" class="btnList">목록</a>
             </div>  
             
@@ -142,8 +157,8 @@
                     </span>                    
                     <textarea name="comment" th:data-seq="${comment.seq}"  readonly>[[${comment.content}]]</textarea>
                     <div>
-                        <a th:href="@{/board/deleteComment(group=${group},cate=${cate},seq=${comment.seq},parent=${comment.parent})}" class="btnCommentDel">삭제</a>
-                        <a th:href="@{#}" class="btnCommentModify">수정</a>
+                       	<a th:href="@{/board/deleteComment(group=${group},cate=${cate},seq=${comment.seq},parent=${comment.parent})}" class="btnCommentDel">삭제</a>
+                       	<a th:href="@{/board/updateComment(group=${group},cate=${cate},seq=${comment.seq})}" class="btnCommentModify">수정</a>
                         <a th:href="@{/board/view(group=${group},cate=${cate},seq=${comment.seq})}" class="btnCommentCancel" style="display:none">취소</a>
                     </div>
                 </article>
@@ -166,9 +181,8 @@
                     </div>
                 </form>
             </section>
-
         </section>
-         <th:block th:include="_footer.html"></th:block>
-    </div>    
+    </div>
+    <th:block th:include="_footer.html"></th:block>    
 </body>
 </html>

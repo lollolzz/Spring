@@ -1,11 +1,11 @@
-#list-wrap {
+#search-wrap {
     position: relative;
     width: 100%;
     height: 100%;
     margin: 0 auto;
     margin-top: 150px;
 }
-#list-wrap .banners{
+#search-wrap .banners{
     width: 100%;
     height: 100px;
     line-height: 30px;
@@ -18,7 +18,7 @@
     width: 110px;
 }
 
-#list-wrap .banners .bigbanner > p{
+#search-wrap .banners .bigbanner > p{
     margin: 0 0 0px;
 }
 a{
@@ -37,7 +37,7 @@ a{
 }
 
 ul {
-    list-style-type: none;
+    search-style-type: none;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
@@ -45,8 +45,8 @@ ul {
     padding-inline-start: 40px;
 }
 
-.list-paging-ol {
-    list-style: decimal;
+.search-paging-ol {
+    search-style: decimal;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
@@ -54,7 +54,7 @@ ul {
     padding-inline-start: 40px;
 }
 
-#list-wrap .banners .bigbanner > .fmenu > h2 {
+#search-wrap .banners .bigbanner > .fmenu > h2 {
     padding: 0 0 10px;
     color: #555;
     text-align: center;
@@ -65,45 +65,53 @@ li {
     margin-left: 0;
 }
 
-#list-wrap .banners > .sub-banners > .subcate {
+#search-wrap .banners > .sub-banners > .subcate {
     border: 0 solid #d7d5d5;
     font-size: 0;
     line-height: 0;
     text-align:center;
 }
 
-#list-wrap .banners > .sub-banners > .subcate > li{
+#search-wrap .banners > .sub-banners > .subcate > li{
     display: inline-block;
     margin: 10px 0;
     padding: 0 0px 0 0;font-size: 12px;
     line-height: 14px;
     vertical-align: top;
-    list-style: none;
+    search-style: none;
 }
 
-#list-wrap .banners > .sub-banners > .subcate > li > a {
+#search-wrap .banners > .sub-banners > .subcate > li > a {
     padding: 0 10px;
     font-weight: bold;
     color: #777;
 }
 
-#list-wrap .clothes-lists  {
+#search-wrap .clothes-search  {
     justify-content: center;
 }
 
-.clothes-lists  .function {
+.clothes-search  .function {
     display:table;
     margin-left: auto;
     margin-right: auto;
 }
 
-.clothes-lists .function  .prdCnt {
+.clothes-search .function  .prdCnt {
     float: left;
-    margin-right: 712px;
+    margin-right: 995px;
     color: #555;
     font-size: 1.3rem;
     margin-block-start: 1em;
     margin-block-end: 1em;
+}
+.clothes-search .function  .prdCnt > em {
+	font-size: 1.2rem;
+	
+}
+.clothes-search .function  .prdCnt > em > span{
+	font-size: 1.4rem;
+	font-weight: bold;
 }
 
 strong {
@@ -111,41 +119,63 @@ strong {
     font-size: 1.4rem;
 }
 
-.clothes-lists .function .list-type-good{
+.prdCnt-0{
+	float: left;
+    margin-right: 805px;
+    color: #555;
+    font-size: 1.3rem;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.clothes-search .function .search-type-good{
     float: right;
     margin-top: 13px;
     
 }
 
-.clothes-lists .function #list-type {
+.good-input1{
+	width:100px;
+	margin-right: 10px;
+}
+.good-input4{
+	width:100px;
+}
+.good-input5{
+	width:100px;
+}
+
+
+
+.clothes-search .function #search-type {
     display: inline;
     margin: 0 43px 0 0;
     padding: 0;
 
 }
 
-.clothes-lists .function #list-type li {
+.clothes-search .function #search-type li {
     display: inline;
     float: left;
     padding: 0 0 0 10px;
     
 }
 
-.clothes-lists .function #list-type li:first-child {
+.clothes-search .function #search-type li:first-child {
     background: none;
 
 }
 
-.clothes-lists .function #list-type li a {
+.clothes-search .function #search-type li a {
     font-size: 1.3rem;
     color: #555;
 }
 
-.jinjja-clothes-lists{
+.jinjja-clothes-search{
     justify-content: center; 
     
 }
-.jinjja-clothes-lists #rows-and-columns {
+.jinjja-clothes-search #rows-and-columns {
     display: table;
     width: 1250px;
     margin-left: auto;
@@ -154,7 +184,7 @@ strong {
     line-height: 0;
 }
 
-.jinjja-clothes-lists #rows-and-columns li.btn_1st-item {
+.jinjja-clothes-search #rows-and-columns li.btn_1st-item {
     width: 25%;
     display: inline-block;
 
@@ -162,31 +192,31 @@ strong {
     vertical-align: top;
 }
 
-.jinjja-clothes-lists #rows-and-columns li.btn_1st-item .box {
+.jinjja-clothes-search #rows-and-columns li.btn_1st-item .box {
     width: 235px;
     float: left;
     font-size: 12px;
     line-height: 18px;
 }
 
-.jinjja-clothes-lists #rows-and-columns span.top {
+.jinjja-clothes-search #rows-and-columns span.top {
     display: block;
     margin: 0 0 10px;
     text-align: center;
 }
 
-.jinjja-clothes-lists #rows-and-columns .prdImg {
+.jinjja-clothes-search #rows-and-columns .prdImg {
     position: relative;
     margin-block-start: 1em;
     margin-block-end: 1em;
 }
 
-.jinjja-clothes-lists #rows-and-columns .prdImg .thumb {
+.jinjja-clothes-search #rows-and-columns .prdImg .thumb {
     width: 280px;
     height: 370px;
 }
 
-.jinjja-clothes-lists #rows-and-columns .prdImg .wishIcon {
+.jinjja-clothes-search #rows-and-columns .prdImg .wishIcon {
     position: absolute;
     right: 5px;
     bottom:5px;
@@ -194,7 +224,7 @@ strong {
     cursor: pointer;
 }
 
-.jinjja-clothes-lists #rows-and-columns .list-product-name {
+.jinjja-clothes-search #rows-and-columns .search-product-name {
     padding: 7px 0;
     width: 280px;
     height: 39px;
@@ -205,65 +235,65 @@ strong {
     margin-block-end: 1em;
 }
 
-.jinjja-clothes-lists #rows-and-columns .list-product-name a {
+.jinjja-clothes-search #rows-and-columns .search-product-name a {
     color: #555;
 }
 
-.jinjja-clothes-lists #rows-and-columns .list-product-name .title_displaynone {
+.jinjja-clothes-search #rows-and-columns .search-product-name .title_displaynone {
     font-weight: normal;
 }
-.jinjja-clothes-lists #rows-and-columns .list-product-name .title_displaynone span {
+.jinjja-clothes-search #rows-and-columns .search-product-name .title_displaynone span {
     font-size: 12px;
   
     color: #555555;
 }
 
-.jinjja-clothes-lists #rows-and-columns .product-listitem {
+.jinjja-clothes-search #rows-and-columns .product-searchitem {
     margin: 0;
     text-align: center;
     width: 247px;
 }
 
-.product-listitem li {
+.product-searchitem li {
     text-align: center;
 }
 
-.product-listitem li strong {
+.product-searchitem li strong {
     font-weight: normal;
     vertical-align: top;
 }
 
-.product-listitem li strong span {
+.product-searchitem li strong span {
     font-size: 12px;
     color: #555555;
     vertical-align: top;
 }
 
-.product-listitem > .price > .title span {
+.product-searchitem > .price > .title span {
     font-weight: bold;
 }
 
-.product-listitem .price span.numbers {
+.product-searchitem .price span.numbers {
     font-size: 12px;
     color: #555555;
     font-weight: bold;
 }
 
-.product-listitem .price #tax-type {
+.product-searchitem .price #tax-type {
     text-decoration: line-through;
 }
 
-.product-listitem .salePrice span {
+.product-searchitem .salePrice span {
     font-size: 12px;
     color: #ff4040;
 }
 
-.product-listitem .salePrice #tax-type {
+.product-searchitem .salePrice #tax-type {
     font-size: 12px;
     color: #555555;
 }
 
-.product-listitem .point .numeric {
+.product-searchitem .point .numeric {
     font-size: 12px;
     color: #555555;
 }
@@ -295,6 +325,11 @@ strong {
 
 .paging {
     width: 100%;
+    padding: 30px 0;
+    text-align: center;
+}
+.paging-0{
+	width: 100%;
     padding: 30px 0;
     text-align: center;
 }

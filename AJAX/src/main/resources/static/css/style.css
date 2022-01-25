@@ -664,8 +664,9 @@ h5.rating.star5 {background-position: 0 -200px;}
 }
 #view .info > .summary .cardhyeteckPage{
     z-index: 9999;
-    display: none; height: 1000px; width: 900px; 
-    position :fixed; 
+    display: none; 
+    height: 120%; 
+    width: 120; 
 }
 #view .info > .summary .cardhyeteckPage > img {
   width: 589px; 
@@ -2468,7 +2469,7 @@ text-align: center;
 
 footer {
   width: 100%;
-  height: 230px;
+  height: 270px;
   display: inline-block;
 }   
 

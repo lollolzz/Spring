@@ -543,6 +543,7 @@
 
 
                     <article class="review">
+                    	<!-- 상품 리뷰 -->
                         <nav>
                             <h1>상품리뷰</h1>
                         </nav>
@@ -560,10 +561,20 @@
                                 <h3>[[${productReview.uid}]]</h3><h3>[[${productReview.rdate}]]</h3>
                                 <p>[[${productReview.content}]]</p>
                             </li>
-                           
                         </ul>
-         				
-                         
+                        <!-- 상품 리뷰 등록 2021년 12월 15일 수요일 능한 수정 중... 와 너무 할게 많다 ...
+                        <nav>
+                        	<h1>상품 리뷰 등록<h1>
+                        </nav>
+                        <form th:action="@{/product/insertComment}" method="post">
+	                        <input type="hidden" name="parent" th:value="${productReviewVo.seq}">
+	                        <input type="hidden" name="uid" th:value="${session.sessMember.uid}">
+	                        	<textarea name="content"></textarea>
+	                        	<div>
+	                        		<a th:href="@{product/veiw}" class="btnCancel">취소</a>
+	                        		<input type="submit" class="btnWrite" value="작성완료"/>
+	                        	</div>
+                        </form>  -->  		
                          <!-- 페이지 네비게이션 -->
                         <div class="paging">
                             <span class="prev" th:if="${groups[0] > 1}">

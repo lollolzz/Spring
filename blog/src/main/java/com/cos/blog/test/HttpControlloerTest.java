@@ -15,15 +15,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class HttpControlloerTest {
 	
 	private static final String TAG = "HttpControlloerTest :";
-
+	// mac에 lombok이 안되는 건가 그냥 내가 못 하는건가....
+	//localhost:8000/blog/http/lombok
+	@GetMapping("/http/lombok")
+	public String lombokTest() {
+		Member m = new Member(1, "lychland", "1234", "email" );
+		System.out.println(TAG+"getter :" + m.getUsername());
+		m.setUsername("cos");
+		System.out.println(TAG+"setter : "+m.getUsername());
+		return "lombok test완료";
+	}
+	
+	
 	// http://localhost:8080/http/get(select)
 	@GetMapping("/http/get")
 	public String getTest(Member m) {
 		// id=1&username=ssar&password=1234&email=ssar@nate.com 이 값을 Member에 넣어준다  // MessageConverter (스프링부트)
 		//return type은 문자열이다 
-		System.out.println(TAG+"getter :" + m.getId());
-		m.setId(5000);
-		System.out.println(TAG+"setter : "+m.getId());
 		
 		return "get 요청: " + m.getId()+" , "+m.getUsername()+", "+m.getPassword()+", "+m.getEmail();
 		

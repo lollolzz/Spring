@@ -1,11 +1,10 @@
 package com.cos.blog.test;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Member {
 
@@ -14,6 +13,7 @@ public class Member {
 	private String username;
 	private String password;
 	private String email;
+	
 	public int getId() {
 		return id;
 	}
@@ -38,13 +38,13 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Builder
 	public Member(int id, String username, String password, String email) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 	}
-	
-	
 		
 }
